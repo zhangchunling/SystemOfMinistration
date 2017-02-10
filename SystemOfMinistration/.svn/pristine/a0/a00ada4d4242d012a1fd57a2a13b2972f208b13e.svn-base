@@ -1,0 +1,190 @@
+<%@page import="com.zrgk.infobox.model.MailBox"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %><!--关于c标签的路径  -->
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>关于发件箱的jsp的页面</title>
+<link rel="stylesheet" type="text/css" href="skin/css/base.css">
+
+<script type="text/javascript" src="<%=basePath%>jsp/jsp_mailbox/js/message.js">message.js方法调用</script>
+
+</head>
+<body leftmargin="8" topmargin="8" background='skin/images/allbg.gif'>
+
+<script type="text/javascript">
+	/* 处理复选框删除的方法 */
+	function subForm2(){
+		var boxArray=document.getElementsByName("id");//得到复选框数组
+			var str="";
+			for(var i=0;i<boxArray.length;i++){
+				if(boxArray[i].checked){
+					str=str+boxArray[i].value+",";//拼接字符串
+				}
+			}
+		document.getElementById("hiddel").value=str.substring(0,str.length-1);//去掉最后的逗号，并赋给赋给隐藏域
+		if(document.getElementById("hiddel").value!=null&&document.getElementById("hiddel").value!=""){
+			if(confirm("您确定删除吗？")){
+			document.getElementById("form2").submit();
+			}
+		}else{
+		alert("请勾选需要删除的选项！");
+		}
+		}
+	
+	//全选
+	function all(){
+		var Array=document.getElementsByName("id");
+		for(var i=0;i<Array.length;i++){
+				Array[i].checked=true;
+		}
+	}
+	//反选
+	function reAll(){
+		var Array=document.getElementsByName("id");
+		for(var i=0;i<Array.length;i++){
+			if(Array[i].checked){
+				Array[i].checked=false;
+			}else{
+				Array[i].checked=true;
+			}
+		}
+	}
+	//提交form3
+	function subForm3(){
+		document.getElementById("form3").submit();
+	}
+</script>
+
+<!--  快速转换位置按钮  -->
+<table width="98%" border="0" cellpadding="0" cellspacing="1" bgcolor="#D1DDAA" align="center">
+<tr>
+ <td height="26" background="skin/images/newlinebg3.gif">
+  <table width="58%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+  <td >
+    当前位置:信息箱>>发件箱
+ </td>
+ </tr>
+</table>
+</td>
+</tr>
+</table>
+<!--  搜索表单  --> 
+<form id="form3" name='form3' action="<%=basePath %>q.servlet" enctype="multipart/form-data" method='get'>
+<input type='hidden' name='dopost' value='' />
+<table width='98%'  border='0' cellpadding='1' cellspacing='1' bgcolor='#CBD8AC' align="center" style="margin-top:8px">
+  <tr bgcolor='#EEF4EA'>
+    <td background='skin/images/wbg.gif' align='center'>
+      <table border='0' cellpadding='0' cellspacing='0'>
+        <tr>
+          <td width='90' align='center'>搜索条件：</td>
+          <td width='160'>
+          <select name='cid' style='width:150'>
+          <option value='0'>选择类型...</option>
+           <option value='1' id="title" name="title" value="<%= request.getAttribute("title")!=null?request.getAttribute("title"):""%>">标题</option>
+          </select>
+        </td>
+        <td width='70' id="title" name="title" value="<%=request.getAttribute("title")!=null?request.getAttribute("title"):"" %>">
+          关键字：
+        </td>
+        <td width='160'>
+          	<input type="text" id="title" name='title' value='' style='width:120px'/>
+        </td>     
+        <td width='110'>
+    		<select id="time" name='time'  style='width:120px'>
+            <option  value='1'>排序...</option>
+            <option   value='2'>发送时间</option>
+      	</select>
+        </td>
+        <td>
+           &nbsp;&nbsp;&nbsp;<input name="imageField" type="image" src="skin/images/frame/search.gif" width="45" height="20" border="0" class="np"/>
+        </td>
+       </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</form>
+<!--  内容列表   --><!--调用删除方法  -->
+<form id="form2" name="form2" action="<%=basePath %>deleteMailBoxServlet" method="post"/>
+<input type="hidden" id="hiddel" name="hiddel" />
+
+<table width="98%" border="0" cellpadding="2" cellspacing="1" bgcolor="#D1DDAA" align="center" style="margin-top:8px">
+<tr bgcolor="#E7E7E7">
+	<td height="24" colspan="12" background="skin/images/tbg.gif">&nbsp;发件箱&nbsp;</td>
+</tr>
+<tr align="center" bgcolor="#FAFAF1" height="22">
+	<td width="4%">选择</td>
+	<td width="6%">序号</td>
+	<td width="10%">标题</td>
+	<td width="10%">内容</td>
+	<td width="10%">收件人</td>
+	<td width="8%">时间</td>
+	<td width="8%">操作</td>
+		</tr>  
+		<!--c标签的 循环  -->
+				<c:forEach var="mes" items="${list}" varStatus="statu">
+				<tr align='center' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22" >
+						<td><input name="id" type="checkbox" id="id" value="${mes.id }" class="np"></td>
+						<td>${statu.index+1}</td>
+						<td>${mes.title }</td>
+						<td>${mes.content}</td>
+						<td>${mes.adressee}</td>
+						<td>${mes.time}</td>
+						<td><a href="javascript:if(confirm('您真的忍心删除吗？'))window.location.
+						 href='<%=basePath%>deleteMailBoxServlet?id=${mes.id}'">删除</a></td>
+				</tr>		
+				</c:forEach>
+			
+
+<tr bgcolor="#FAFAF1">
+<td height="28" colspan="12">
+	&nbsp;
+	<a href="javascript:onclick=all();" class="coolbg">全选</a>
+	<a href="javascript:onclick=reAll();" class="coolbg">反选</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="javascript:onclick=subForm2();" class="coolbg">&nbsp;删除&nbsp;</a>
+	<a href="<%=basePath %>portProductServlet" class="coolbg">&nbsp;导出Excel&nbsp;</a>
+	
+    	
+</td>
+</tr>
+<tr align="right" bgcolor="#EEF4EA">
+	<td height="36" colspan="12" align="center"><!--翻页代码 -->
+		<%
+    		MailBox  mailBox=(MailBox)request.getAttribute("mailBox");
+    		
+    		//计算下一页的值
+    		int nextPage=1;
+    		//如果当前页已经是最后一页则不加值
+    		if(mailBox.getCurrentPage()==mailBox.getTotalPage()){
+    			nextPage=mailBox.getCurrentPage();
+    		}else{
+    			nextPage=mailBox.getCurrentPage()+1; //下一页计算的值 
+    		}   		
+    		//计算上一页的值 
+    		int upPage=1;
+    		if(mailBox.getCurrentPage()>1)
+    			upPage=mailBox.getCurrentPage()-1;
+    	 %>
+    	<center>
+	    	<a href="<%=basePath%>query.servlet?currentPage=1">首页</a>  
+	    	<a href="<%=basePath%>query.servlet?currentPage=<%=upPage%>">上一页 </a> 
+	    	<a href="<%=basePath%>query.servlet?currentPage=<%=nextPage%>">下一页</a>  
+	    	<a href="<%=basePath%>query.servlet?currentPage=<%=mailBox.getTotalPage()%>">尾页</a>
+    	</center>
+	</td>
+</tr>
+</table>
+
+</form>
+
+</body>
+</html>

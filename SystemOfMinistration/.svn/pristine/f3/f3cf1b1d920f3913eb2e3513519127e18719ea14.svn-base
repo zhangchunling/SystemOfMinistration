@@ -1,0 +1,57 @@
+package com.zrgk.project.servlet;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.zrgk.project.model.Basicer;
+import com.zrgk.project.model.Needer;
+import com.zrgk.project.service.BasicerServiceInter;
+import com.zrgk.project.service.NeederServiceInter;
+import com.zrgk.project.service.impl.BasicerServiceImpl;
+import com.zrgk.project.service.impl.NeederServiceImpl;
+
+/**
+ * 
+ * @function: 需求信息管理-->主页面的查询的servlet
+ * @author: 张春玲
+ * @time: 2015-6-8
+ *
+ */
+public class Need_Servlet extends HttpServlet{
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		doPost(req, resp);
+	}
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		//处理编码格式
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		
+		//获得数据库所有信息
+		NeederServiceInter need=new NeederServiceImpl();
+		List<Needer> list=new ArrayList<Needer>();
+		list=need.queryAllNeeder();
+		//获得项目信息,并赋进javabean
+		Basicer ba=new Basicer();
+		BasicerServiceInter baser=new BasicerServiceImpl();
+		for(Needer ne:list){
+			int id=ne.getProject_id();
+			ba=baser.queryBasicerById(id);
+			ne.setProName(ba.getProjectName());//获得项目名称，并赋进Caker的javabean里
+		}
+		
+		
+		request.setAttribute("list",list);
+		request.getRequestDispatcher("/jsp/jsp_project/project-need.jsp").forward(request, response);
+	}
+
+}

@@ -1,0 +1,33 @@
+package com.zrgk.purview.dao;
+
+import java.util.List;
+
+import com.zrgk.purview.model.Menu;
+import com.zrgk.purview.model.Role;
+
+ 
+
+/**
+ * 
+ * 人员表的增删该查的实现类 role
+ * @author wfh
+ *2015-06-04
+ */
+public interface RoleDaoInter {
+//	查询全部的role表的内容的方法
+	List<Role> QueryAll(Role role);
+
+	void deleteRole(Role role);
+
+	Role QueryByRid(Role role);
+
+	void insertRole(Role role);
+
+	void CancelUpdateRole(Role role);
+
+	void UpdateRole(Role role);
+	
+	int totalSize(Role role);
+	
+	
+}

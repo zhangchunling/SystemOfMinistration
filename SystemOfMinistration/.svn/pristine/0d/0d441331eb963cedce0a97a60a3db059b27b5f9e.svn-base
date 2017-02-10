@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>SystemOfMinistration</display-name>
+<!-- 1.信息管理相关servlet -->
+  <!-- 配置添加新项目的servelt -->
+  <servlet>
+  	<servlet-name>basicInsert</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.BasicInsertServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>basicInsert</servlet-name>
+  	<url-pattern>/basicInsertServlet</url-pattern>
+  </servlet-mapping>
+  <!-- 配置主页面的servlet -->
+  <servlet>
+  	<servlet-name>basic</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Basic_Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>basic</servlet-name>
+  	<url-pattern>/basicServlet</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 信息查询配置 -->
+  <servlet>
+  <servlet-name>queryEmployeeServlet</servlet-name>
+  <servlet-class>com.zrgk.myinfo.servlet.QueryEmployeeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>  
+  <servlet-name>queryEmployeeServlet</servlet-name> 
+  <url-pattern>/queryEmployeeServlet</url-pattern>
+  </servlet-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

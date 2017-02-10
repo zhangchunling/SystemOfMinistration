@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>SystemOfMinistration</display-name>
+   <!--樊丙富  -->
+  <!--关于发信息的sevlet的配置信息  -->
+  <servlet>
+  	<servlet-name>uploadFileSevlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.UploadFileSevlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>uploadFileSevlet</servlet-name>
+  	<url-pattern>/up.servlet.action</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 关于发信息的收件人的配置-->
+  <servlet>
+  	<servlet-name>seekMailBoxSevlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.SeekMailBoxServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>seekMailBoxSevlet</servlet-name>
+  	<url-pattern>/seekMailServlet.action</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+   <!--关于发件箱的sevlet的配置信息  -->
+  <servlet>
+  	<servlet-name>queryMailBoxServlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.QueryMailBoxServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>queryMailBoxServlet</servlet-name>
+  	<url-pattern>/query.servlet.action</url-pattern>
+  </servlet-mapping>
+  
+   <!--关于收件箱的sevlet的配置信息  -->
+  <servlet>
+  	<servlet-name>qMailBoxServlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.QMailBoxServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>qMailBoxServlet</servlet-name>
+  	<url-pattern>/q.servlet.action</url-pattern>
+  </servlet-mapping>
+  
+  
+    <!-- 关于发件箱删除操作的servlet配置 -->
+  <servlet>
+  	<servlet-name>deleteMailBoxServlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.DeleteMailBoxServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>deleteMailBoxServlet</servlet-name>
+  	<url-pattern>/deleteMailBoxServlet.action</url-pattern>
+  </servlet-mapping>
+     <!-- 关于收件箱删除操作的servlet配置 -->
+  <servlet>
+  	<servlet-name>dMailBoxServlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.DMailBoxServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>dMailBoxServlet</servlet-name>
+  	<url-pattern>/dMailBoxServlet.action</url-pattern>
+  </servlet-mapping>
+  
+    <!-- 关于收件箱下载的操作的servlet配置 -->
+  <servlet>
+  	<servlet-name>down.servlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.DownloadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>down.servlet</servlet-name>
+  	<url-pattern>/down.servlet.action</url-pattern>
+  </servlet-mapping>
+  
+  
+   <!-- 关于发件箱导出excel的servlet配置 -->
+  <servlet>
+  	<servlet-name>sendExcelServlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.SendExcelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>sendExcelServlet</servlet-name>
+  	<url-pattern>/portProductServlet.action</url-pattern>
+  </servlet-mapping>
+  
+   <!-- 关于收件箱导出excel的servlet配置 -->
+  <servlet>
+  	<servlet-name>giveExcelServlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.GiveExcelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>giveExcelServlet</servlet-name>
+  	<url-pattern>/ExcelServlet.action</url-pattern>
+  </servlet-mapping>
+
+   
+  <!-- ************王思萌&&&&&&&&&&&&客户信息管理**************** --> 
+  <!-- 添加客户相关信息的servlet配置 -->
+  <servlet>
+  	<servlet-name>usersServlet</servlet-name>
+  	<servlet-class>com.zrgk.clientinfo.servlet.UsersServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>usersServlet</servlet-name>
+  	<url-pattern>/musersServlet</url-pattern>
+  </servlet-mapping>
+ 
+  <!-- 查询所有客户信息的servlet配置 -->
+  <servlet>
+  	<servlet-name>usersListServlet</servlet-name>
+  	<servlet-class>com.zrgk.clientinfo.servlet.QueryUsersServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>usersListServlet</servlet-name>
+  	<url-pattern>/musersListServlet</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 查询单个客户信息的servlet配置 -->
+  <servlet>
+  	<servlet-name>lookUserServlet</servlet-name>
+  	<servlet-class>com.zrgk.clientinfo.servlet.LookUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>lookUserServlet</servlet-name>
+  	<url-pattern>/mlookUserServlet</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 根据客户主键查客户信息的servlet配置 -->
+  <servlet>
+  	<servlet-name>byIdServlet</servlet-name>
+  	<servlet-class>com.zrgk.clientinfo.servlet.ByIdServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>byIdServlet</servlet-name>
+  	<url-pattern>/mbyIdServlet</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 删除客户信息的servlet配置 -->
+  <servlet>
+  	<servlet-name>deleteUserServlet</servlet-name>
+  	<servlet-class>com.zrgk.clientinfo.servlet.DeleteUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>deleteUserServlet</servlet-name>
+  	<url-pattern>/mdeleteUserServlet</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 编辑客户信息的servlet配置 -->
+  <servlet>
+  	<servlet-name>editUserServlet</servlet-name>
+  	<servlet-class>com.zrgk.clientinfo.servlet.EditUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>editUserServlet</servlet-name>
+  	<url-pattern>/meditUserServlet</url-pattern>
+  </servlet-mapping>
+  
+   <!-- 导出Excel客户信息的servlet配置 -->
+  <servlet>
+  	<servlet-name>excelServlet</servlet-name>
+  	<servlet-class>com.zrgk.clientinfo.servlet.ExcelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>excelServlet</servlet-name>
+  	<url-pattern>/mexcelServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  <!--*****************1.信息管理相关servlet:以下的servlet是张春玲的********* -->
+  
+  <!-- 配置添加新项目的servelt -->
+  <servlet>
+  	<servlet-name>basicInsert</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Basic_InsertServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>basicInsert</servlet-name>
+  	<url-pattern>/basicInsertServlet.action</url-pattern>
+  </servlet-mapping>
+  <!-- 配置主页面的servlet -->
+  <servlet>
+  	<servlet-name>basic</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Basic_Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>basic</servlet-name>
+  	<url-pattern>/basicServlet.action</url-pattern>
+  </servlet-mapping>
+  <!-- 配置编辑用的servlet -->
+  <servlet>
+  	<servlet-name>basicEdit</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Basic_EditServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>basicEdit</servlet-name>
+  	<url-pattern>/basicEditServlet.action</url-pattern>
+  </servlet-mapping>
+  <!-- 配置更新的servlet -->
+  <servlet>
+  	<servlet-name>basicUpdate</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Basic_UpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>basicUpdate</servlet-name>
+  	<url-pattern>/basicUpdateServlet.action</url-pattern>
+  </servlet-mapping>
+  <!-- 配置查看详情的servlet -->
+  <servlet>
+  	<servlet-name>basicLook</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Basic_LookServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>basicLook</servlet-name>
+  	<url-pattern>/basicLookServlet.action</url-pattern>
+  </servlet-mapping>
+   <!-- 配置返回主页面时查回数据的servlet -->
+  <servlet>
+  	<servlet-name>basicQueryAll</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Basic_LookServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>basicQueryAll</servlet-name>
+  	<url-pattern>/basicQueryAllServlet.action</url-pattern>
+  </servlet-mapping>
+   <!-- 配置删除的servlet -->
+  <servlet>
+  	<servlet-name>basicDelete</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Basic_DeleteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>basicDelete</servlet-name>
+  	<url-pattern>/basicDeleteServlet.action</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 配置导出Excel的servlet -->
+  <servlet>
+  	<servlet-name>excelExcelServlet</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Basic_ExportExcelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>excelExcelServlet</servlet-name>
+  	<url-pattern>/excelServlet.action</url-pattern>
+  </servlet-mapping>
+  
+  
+ <!-- 2.信息管理相关servlet：张春玲 -->
+  <!-- 配置添加新需求的servelt -->
+  <servlet>
+  	<servlet-name>needInsert</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Need_InsertServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>needInsert</servlet-name>
+  	<url-pattern>/needInsertServlet.action</url-pattern>
+  </servlet-mapping> 
+  <!-- 配置主页面的servlet -->
+  <servlet>
+  	<servlet-name>need</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Need_Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>need</servlet-name>
+  	<url-pattern>/needServlet.action</url-pattern>
+  </servlet-mapping>
+  <!-- 配置编辑用的servlet -->
+  <servlet>
+  	<servlet-name>needEdit</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Need_EditServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>needEdit</servlet-name>
+  	<url-pattern>/needEditServlet.action</url-pattern>
+  </servlet-mapping>
+   <!-- 配置获取项目名称的servlet -->
+  <servlet>
+  	<servlet-name>choice</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Need_ChoiceServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>choice</servlet-name>
+  	<url-pattern>/needChoiceServlet.action</url-pattern>
+  </servlet-mapping>
+  <!-- 配置更新的servlet -->
+  <servlet>
+  	<servlet-name>needUpdate</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Need_UpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>needUpdate</servlet-name>
+  	<url-pattern>/needUpdateServlet.action</url-pattern>
+  </servlet-mapping>
+   <!-- 配置查看详情的servlet -->
+  <servlet>
+  	<servlet-name>needLook</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Need_LookServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>needLook</servlet-name>
+  	<url-pattern>/needLookServlet.action</url-pattern>
+  </servlet-mapping>
+   <!-- 配置删除的servlet -->
+  <servlet>
+  	<servlet-name>needDelete</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Need_DeleteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>needDelete</servlet-name>
+  	<url-pattern>/needDeleteServlet.action</url-pattern>
+  </servlet-mapping>
+   <!-- 配置导出的servlet -->
+  <servlet>
+  	<servlet-name>needExcelServlet</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Need_ExportExcelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>needExcelServlet</servlet-name>
+  	<url-pattern>/needExcelServlet.action</url-pattern>
+  </servlet-mapping>
+ 
+ <!-- 3.模块信息的servlet -->
+   <!-- 配置主页面的servlet -->
+  <servlet>
+  	<servlet-name>cake</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Cake_Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>cake</servlet-name>
+  	<url-pattern>/cakeServlet.action</url-pattern>
+  </servlet-mapping> 
+   <!-- 配置添加后保存进入的serlvet -->
+   <servlet>
+  	<servlet-name>cakeInsertAddservlet</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Cake_InsertServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>cakeInsertAddservlet</servlet-name>
+  	<url-pattern>/cakeInsertAddservlet.action</url-pattern>
+  </servlet-mapping> 
+   <!-- 配置异步按父id查询的serlvet -->
+   <servlet>
+  	<servlet-name>cakeJaxaAddservlet</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Cake_JaxaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>cakeJaxaAddservlet</servlet-name>
+  	<url-pattern>/cakeJaxaservlet.action</url-pattern>
+  </servlet-mapping> 
+  <!-- 配置查看详情的serlvet -->
+   <servlet>
+  	<servlet-name>cakeLookservlet</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Cake_LookServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>cakeLookservlet</servlet-name>
+  	<url-pattern>/cakeLookservlet.action</url-pattern>
+  </servlet-mapping> 
+   <!-- 以上的servlet是张春玲的 -->
+   
+   
+   
+   <!-- 信息查询配置 -->
+  <servlet>
+  <servlet-name>queryEmployeeServlet</servlet-name>
+  <servlet-class>com.zrgk.myinfo.servlet.QueryEmployeeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>  
+  <servlet-name>queryEmployeeServlet</servlet-name> 
+  <url-pattern>/queryEmployeeServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+   <!-- 配置过滤器 -->
+  <filter>
+  	<filter-name>sessionFilter</filter-name>
+  	<filter-class>com.zrgk.myinfo.Filter.MyFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>sessionFilter</filter-name>
+  	<url-pattern>*.action</url-pattern><!-- 代表的是过滤所有请求服务的路径 -->
+  </filter-mapping>
+  
+    <!-- 登录的servlet配置 -->
+    <servlet>
+    <servlet-name>loginServlet</servlet-name>
+    <servlet-class>com.zrgk.myinfo.servlet.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    <servlet-name>loginServlet</servlet-name>
+    <url-pattern>/loginServlet</url-pattern>
+    </servlet-mapping> 
+     <!-- 生成验证码的servlet配置 -->
+  <servlet>
+  <servlet-name>getKeyServlet</servlet-name>
+  <servlet-class>com.zrgk.utils.GetKey</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>getKeyServlet</servlet-name>
+  <url-pattern>/getKey</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
+  <!--查询CancelMenuServlet 配置文件  -->
+  
+  <servlet>
+  <servlet-name>cancelMenuServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.menu.CancelMenuServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>cancelMenuServlet</servlet-name>
+  <url-pattern>/cancelMenu.Servlet</url-pattern>
+  </servlet-mapping>
+  
+   
+  
+  <!--查询CancelEmployeetServlet 配置文件  -->
+  
+  <servlet>
+  <servlet-name>cancelEmployeetServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.employee.CancelEmployeeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>cancelEmployeetServlet</servlet-name>
+  <url-pattern>/cancel.Servlet</url-pattern>
+  </servlet-mapping>
+  
+  
+   
+  <!--查询CancelRoleServlet 配置文件  -->
+  
+  <servlet>
+  <servlet-name>cancelRoleServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.role.CancelRoleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>cancelRoleServlet</servlet-name>
+  <url-pattern>/cancelRole.Servlet</url-pattern>
+  </servlet-mapping>
+  
+   
+  
+  <!--查询ExportEmployeetServlet 配置文件  -->
+  
+  <servlet>
+  <servlet-name>exportEmployeetServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.employee.ExportEmployeetServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>exportEmployeetServlet</servlet-name>
+  <url-pattern>/export.Servlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  <!--查询UpdateEmployeeServlet配置文件  -->
+  
+  <servlet>
+  <servlet-name>updateEmployeeServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.employee.UpdateEmployeeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>updateEmployeeServlet</servlet-name>
+  <url-pattern>/update.Servlet</url-pattern>
+  </servlet-mapping>
+  
+   <!--查询UpdateRoleServlet配置文件  -->
+  
+  <servlet>
+  <servlet-name>updateRoleServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.role.UpdateRoleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>updateRoleServlet</servlet-name>
+  <url-pattern>/updateRole.Servlet</url-pattern>
+  </servlet-mapping>
+  
+  <!--查询UpdateMenuServlet配置文件  -->
+  
+  <servlet>
+  <servlet-name>updateMenuServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.menu.UpdateMenuServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>updateMenuServlet</servlet-name>
+  <url-pattern>/updateMenu.Servlet</url-pattern>
+  </servlet-mapping>
+  
+   <!--查看LookEmployeeServlet配置文件  -->
+  
+  <servlet>
+  <servlet-name>lookEmployeeServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.employee.LookEmployeeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>lookEmployeeServlet</servlet-name>
+  <url-pattern>/lookEmployee.Servlet</url-pattern>
+  </servlet-mapping>
+ 
+ <!--查看LookRoleServlet配置文件  -->
+  
+  <servlet>
+  <servlet-name>lookRoleServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.role.LookRoleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>lookRoleServlet</servlet-name>
+  <url-pattern>/lookRole.Servlet</url-pattern>
+  </servlet-mapping>
+ 
+  
+  <!--InsertEmployee.servlet配置文件  -->
+  
+  <servlet>
+  <servlet-name>insertEmployeeServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.employee.InsertEmployeeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>insertEmployeeServlet</servlet-name>
+  <url-pattern>/insertEmployee.Servlet</url-pattern>
+  </servlet-mapping>
+  
+  <!--InsertRoleServlet配置文件  -->
+  
+  <servlet>
+  <servlet-name>insertRoleServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.role.InsertRoleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>insertRoleServlet</servlet-name>
+  <url-pattern>/insertRole.Servlet</url-pattern>
+  </servlet-mapping>
+  
+  <!--InsertMenuServlet配置文件  -->
+  
+  <servlet>
+  <servlet-name>insertMenuServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.menu.InsertMenuServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>insertMenuServlet</servlet-name>
+  <url-pattern>/insertMenu.Servlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  <!--查询QueryAllServlet配置文件  -->
+  
+  <servlet>
+  <servlet-name>queryAllServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.employee.QueryAllServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>queryAllServlet</servlet-name>
+  <url-pattern>/queryAll.Servlet</url-pattern>
+  </servlet-mapping>
+  
+  <!--查询QueryAllServlet配置文件  -->
+  
+  <servlet>
+  <servlet-name>queryAllRoleServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.role.QueryAllServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>queryAllRoleServlet</servlet-name>
+  <url-pattern>/queryAllRole.Servlet</url-pattern>
+  </servlet-mapping>
+  
+  <!--查询QueryAllMenuServlet配置文件  -->
+  
+  <servlet>
+  <servlet-name>queryAllMenuServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.menu.QueryAllMenuServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>queryAllMenuServlet</servlet-name>
+  <url-pattern>/queryAllMenu.Servlet</url-pattern>
+  </servlet-mapping>
+  
+  
+   <!--查询QueryByEidServlet配置文件  -->
+  
+  <servlet>
+  <servlet-name>queryByEidServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.employee.QueryByEidServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>queryByEidServlet</servlet-name>
+  <url-pattern>/queryByEid.Servlet</url-pattern>
+  </servlet-mapping>
+  
+  
+   <!--查询QueryByMidServlet配置文件  -->
+  
+  <servlet>
+  <servlet-name>queryByMidServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.menu.QueryByMidServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>queryByMidServlet</servlet-name>
+  <url-pattern>/queryByMid.Servlet</url-pattern>
+  </servlet-mapping>
+  
+   <!--查询QueryAllRoleServlet配置文件  -->
+  
+  <servlet>
+  <servlet-name>queryEmployeeAllRoleServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.employee.QueryEmployeeAllRoleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>queryEmployeeAllRoleServlet</servlet-name>
+  <url-pattern>/queryEmployeeAllRole.Servlet</url-pattern>
+  </servlet-mapping>
+  
+  
+    <!--查询QueryByRidServlet配置文件  -->
+  
+  <servlet>
+  <servlet-name>queryByRidServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.role.QueryByRidServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>queryByRidServlet</servlet-name>
+  <url-pattern>/queryByRid.Servlet</url-pattern>
+  </servlet-mapping>
+  
+  
+    <!--查询QueryByRidServlet配置文件  -->
+  
+  <servlet>
+  <servlet-name>AddParentIdQueryServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.menu.AddParentIdQueryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>AddParentIdQueryServlet</servlet-name>
+  <url-pattern>/addParentIdQuery.Servlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
+    <!--查询AddMenuServlet配置文件  -->
+  
+  <servlet>
+  <servlet-name>addMenuServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.role.AddMenuServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>addMenuServlet</servlet-name>
+  <url-pattern>/addMenu.Servlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+ 
+  <!--DeleteEmployee.servlet配置文件  -->
+  
+  <servlet>
+  <servlet-name>deleteEmployee</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.employee.DeleteEmployeeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>deleteEmployee</servlet-name>
+  <url-pattern>/deleteEmployee.Servlet</url-pattern>
+  </servlet-mapping>
+  
+   <!--DeleteRole.servlet配置文件  -->
+  
+  <servlet>
+  <servlet-name>deleteRoleServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.role.DeleteRoleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>deleteRoleServlet</servlet-name>
+  <url-pattern>/deleteRole.Servlet</url-pattern>
+  </servlet-mapping>
+  
+  <!--DeleteMenu.servlet配置文件  -->
+  
+  <servlet>
+  <servlet-name>deleteMenuServlet</servlet-name>
+  <servlet-class>com.zrgk.purview.servlet.menu.DeleteMenuServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>deleteMenuServlet</servlet-name>
+  <url-pattern>/deleteMenu.Servlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
+  
+  <welcome-file-list>
+    <welcome-file>jsp/else/login.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

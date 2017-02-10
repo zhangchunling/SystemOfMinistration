@@ -1,0 +1,21 @@
+package com.zrgk.project.service;
+
+import java.util.List;
+
+import com.zrgk.project.model.Needer;
+/**
+ * 
+ * @function: service层，增删改查接口
+ * @author: 张春玲
+ * @time: 2015-6-4
+ *
+ */
+public interface NeederServiceInter {
+	
+	boolean insertNeeder(Needer needer);		//增	
+	void deleteNeeder(int pid);				//删
+	boolean updateNeeder(Needer needer);		//改
+	List<Needer> queryAllNeeder();			//查询所有
+	Needer queryNeederById(int pid);			//按id查
+
+}

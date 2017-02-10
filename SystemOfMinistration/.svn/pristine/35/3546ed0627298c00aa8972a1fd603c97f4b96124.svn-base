@@ -1,0 +1,58 @@
+package com.zrgk.project.servlet;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import jdk.nashorn.internal.ir.RuntimeNode.Request;
+
+import com.zrgk.project.model.Basicer;
+import com.zrgk.project.service.BasicerServiceInter;
+import com.zrgk.project.service.impl.BasicerServiceImpl;
+/**
+ * 
+ * @function: 基本信息管理的servlet
+ * @author: 张春玲
+ * @time: 2015-6-4
+ *
+ */
+public class BasicServlet extends HttpServlet{
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {		
+		doPost(req, resp);
+	}
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		//处理编码格式
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		
+		//获取从页面传来的参数
+		String projectName  = request.getParameter("projectname");
+		String customerName = request.getParameter("customername");
+		String personInCharge = request.getParameter("personIncharge");
+		String manager = request.getParameter("manager");
+		String persons = request.getParameter("persons");
+		String startTime = request.getParameter("starttime");
+		String relstartTime = request.getParameter("relstarttime");
+		String cost = request.getParameter("cost");
+		String level = request.getParameter("level");
+		String completeTime = request.getParameter("completetime");
+		String comment = request.getParameter("comment");
+		String updatePeople = request.getParameter("");
+		
+		//将页传来的参数组装进javabean
+		Basicer ba=new Basicer();
+		
+		
+		
+		BasicerServiceInter basicService=new BasicerServiceImpl();
+		
+	}
+}

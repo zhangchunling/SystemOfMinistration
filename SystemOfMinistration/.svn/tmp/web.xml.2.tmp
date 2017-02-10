@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>SystemOfMinistration</display-name>
+<<<<<<< .mine
+  
+<!-- 1.信息管理相关servlet -->
+  <!-- 配置添加新项目的servelt -->
+  <servlet>
+  	<servlet-name>basicInsert</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Basic_InsertServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>basicInsert</servlet-name>
+  	<url-pattern>/basicInsertServlet</url-pattern>
+  </servlet-mapping>
+  <!-- 配置主页面的servlet -->
+=======
+  <!--樊丙富  -->
+  <!--关于发信息的sevlet的配置信息  -->
+>>>>>>> .r210
+  <servlet>
+  	<servlet-name>uploadFileSevlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.UploadFileSevlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>uploadFileSevlet</servlet-name>
+  	<url-pattern>/up.servlet</url-pattern>
+  </servlet-mapping>
+  
+   <!--关于发件箱的sevlet的配置信息  -->
+  <servlet>
+  	<servlet-name>queryMailBoxServlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.QueryMailBoxServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>queryMailBoxServlet</servlet-name>
+  	<url-pattern>/query.servlet</url-pattern>
+  </servlet-mapping>
+  
+   <!--关于收件箱的sevlet的配置信息  -->
+  <servlet>
+  	<servlet-name>qMailBoxServlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.QMailBoxServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>qMailBoxServlet</servlet-name>
+  	<url-pattern>/q.servlet</url-pattern>
+  </servlet-mapping>
+  
+  
+    <!-- 关于发件箱删除操作的servlet配置 -->
+  <servlet>
+  	<servlet-name>deleteMailBoxServlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.DeleteMailBoxServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>deleteMailBoxServlet</servlet-name>
+  	<url-pattern>/deleteMailBoxServlet</url-pattern>
+  </servlet-mapping>
+     <!-- 关于收件箱删除操作的servlet配置 -->
+  <servlet>
+  	<servlet-name>dMailBoxServlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.DMailBoxServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>dMailBoxServlet</servlet-name>
+  	<url-pattern>/dMailBoxServlet</url-pattern>
+  </servlet-mapping>
+<<<<<<< .mine
+  <!-- 配置导出Excel的servlet -->
+  <servlet>
+  	<servlet-name>excelNeedServlet</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Basic_ExportExcelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>excelNeedServlet</servlet-name>
+  	<url-pattern>/excelNeedServlet</url-pattern>
+  </servlet-mapping>
+  
+ 
+ <!-- 3.模块信息的servlet -->
+   <!-- 配置主页面的servlet -->
+=======
+  
+   <!-- 关于发件箱导出excel的servlet配置 -->
+>>>>>>> .r210
+  <servlet>
+  	<servlet-name>sendExcelServlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.SendExcelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>sendExcelServlet</servlet-name>
+  	<url-pattern>/portProductServlet</url-pattern>
+  </servlet-mapping>
+  
+   <!-- 关于收件箱导出excel的servlet配置 -->
+  <servlet>
+  	<servlet-name>giveExcelServlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.GiveExcelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>giveExcelServlet</servlet-name>
+  	<url-pattern>/ExcelServlet</url-pattern>
+  </servlet-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

@@ -1,0 +1,244 @@
+<%@page import="com.zrgk.project.model.Basicer"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %><!-- 导入c标签库 -->
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base href="<%=basePath%>">
+<title>项目信息管理</title>
+<!-- ----------------------------------------------------javascript------------------------------------------------------ -->
+<link rel="stylesheet" type="text/css" href="skin/css/base.css">
+<script type="text/javascript">
+	/* 处理复选框 */
+	function subForm2(){
+		var boxArray=document.getElementsByName("id");//得到复选框数组
+		var str="";
+		for(var i=0;i<boxArray.length;i++){
+			if(boxArray[i].checked){
+				str=str+boxArray[i].value+","//拼接字符串
+			}
+		}
+		document.getElementById("hiddel").value=str.substring(0,str.length-1);//去掉最后的逗号，并赋给赋给隐藏域
+		if(confirm("您确定要删除吗")){
+			document.getElementById("form2").submit();
+		}
+		
+	}
+	
+	//全选
+	function all(){
+		var Array=document.getElementsByName("id");
+		for(var i=0;i<Array.length;i++){
+				Array[i].checked=true;
+		}
+	}
+	//反选
+	function reAll(){
+		var Array=document.getElementsByName("id");
+		for(var i=0;i<Array.length;i++){
+			if(Array[i].checked){
+				Array[i].checked=false;
+			}else{
+				Array[i].checked=true;
+			}
+		}
+	}
+	//提交form3
+	function subForm3(){
+		document.getElementById("form3").submit();
+	}
+</script>
+</head>
+<body leftmargin="8" topmargin="8" background='skin/images/allbg.gif'>
+
+<!--  -------------------------------------------------快速转换位置按钮---------------------------------------------------  -->
+<table width="98%" border="0" cellpadding="0" cellspacing="1" bgcolor="#D1DDAA" align="center">
+<tr>
+ <td height="26" background="skin/images/newlinebg3.gif">
+  <table width="58%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+  <td >
+    当前位置:项目管理>>基本信息管理
+ </td>
+  <td>
+    <input type='button' class="coolbg np" onClick="location='jsp/jsp_project/project-base-add.jsp';" value='添加新项目' />
+ </td>
+ </tr>
+</table>
+</td>
+</tr>
+</table>
+
+<!--  ----------------------------------------------------搜索表单-------------------------------------------------------  -->
+<form id="form3" name="form3" action="<%=basePath %>basicServlet" method="post">
+<input type='hidden' name='dopost' value='' />
+<table width='98%'  border='0' cellpadding='1' cellspacing='1' bgcolor='#CBD8AC' align="center" style="margin-top:8px">
+  <tr bgcolor='#EEF4EA'>
+    <td background='skin/images/wbg.gif' align='center'>
+      <table border='0' cellpadding='0' cellspacing='0'>
+        <tr>
+          <td width='90' align='center'>搜索条件：</td>
+          <td width='160'>
+          <input type="hidden" id="hides" name="hides" value=${conditon } /><!-- ----隐藏域存回写值------- -->     
+          <select id="condition" name="condition" style='width:150'>          
+         	<option value="0">选择类型...</option>
+          	<option value="1">项目名称</option>
+          	<option value="2">项目经理</option>
+          </select>
+        </td>
+        <td width='70'>
+          关键字：
+        </td>
+        <td width='160'>
+        	<input type="hidden" id="keyhid" name="keyhid" value=1 /><!-- 标记：在servlet里可判断值是否从搜索表单提交过去 -->
+          	<input type='text'   id="keyword" name='keyword' value='${key }' style='width:120px' />
+        </td>
+        <td width='110'>
+        	<input type="hidden" id="hid" name="hid" value=${order } />
+    		<select id="orderby" name='orderby' style='width:120px'>
+            <option value='0'>排序...</option>
+            <option value='1'>立项时间</option>
+            <option value='2'>计划完成时间</option>
+      	</select>
+        </td>
+        <td>
+          &nbsp;&nbsp;&nbsp;
+          <a href="javascript:onclick=subForm3();" class="coolbg" width="45" height="20" border="0" class="np">搜索</a>
+        </td>
+       </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+</form>
+
+<!--  ---------------------------------------------------内容列表 --------------------------------------------------------  -->
+
+<form action="<%=basePath %>basicDeleteServlet"  id="form2" name="form2" method="post">
+<input type="hidden" id="hiddel" name="hiddel" /><!-- ----------------隐藏域存js处理后的复选框的值--------------------- -->
+<table width="98%" border="0" cellpadding="2" cellspacing="1" bgcolor="#D1DDAA" align="center" style="margin-top:8px">
+<tr bgcolor="#E7E7E7">
+	<td height="24" colspan="12" background="skin/images/tbg.gif">&nbsp;项目信息列表&nbsp;</td>
+</tr>
+<tr align="center" bgcolor="#FAFAF1" height="22">
+	<td width="4%">选择</td>
+	<td width="6%">序号</td>
+	<td width="10%">项目名称</td>
+	<td width="10%">客户公司名称</td>
+	<td width="10%">客户方负责人</td>
+	<td width="5%">项目经理</td>
+	<td width="8%">开发人员数</td>
+	<td width="6%">立项时间</td>
+	<td width="8%">最近更新时间</td>
+	<td width="8%">计划完成时间</td>
+	<td width="8%">状态</td>
+	<td width="10%">操作</td>
+</tr>
+<!-- -------------------用c标签循环数据-------------------- -->
+<c:forEach var="basicer" items="${list }" varStatus="index">	
+	<tr align='center' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22" >
+		<td><input name="id" type="checkbox" id="id" value="${basicer.pid}" class="np">
+			
+		</td>			
+		<td>${index.index+1}</td><!-- 注意取循环变量的方法 -->
+		<td align="left"><a href=''><u>${basicer.projectName}</u></a></td>
+		<td>${basicer.customerName}</td>
+		<td>${basicer.personInCharge }</td>
+		<td>${basicer.manager }</td>
+		<td>${basicer.persons}</td>
+		<td>${basicer.relstartTime} </td>
+		<td>${basicer.updateTime} </td>
+		<td>${basicer.completeTime}</td>
+		<td>
+			<!-- ----用C标签进行状态的判断赋值---- -->		
+			<c:choose >
+				<c:when test="${basicer.state==1}">开始</c:when>
+				<c:when test="${basicer.state==2}">进行中</c:when>
+				<c:when test="${basicer.state==3}">完成</c:when>
+			</c:choose>		
+		</td>		
+		<td><a href="<%=basePath%>basicEditServlet?id=${basicer.pid}">编辑</a> | <a href="<%=basePath%>basicLookServlet?id=${basicer.pid}">查看详情</a></td>
+	</tr>
+</c:forEach>
+
+<tr bgcolor="#FAFAF1">
+<td height="28" colspan="12">
+	&nbsp;
+	<!-- 以下都是超链触发的事件 -->
+	
+	<a href="javascript:onclick=all();"   class="coolbg">全选</a>
+	<a href="javascript:onclick=reAll();" class="coolbg">反选</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="javascript:onclick=subForm2();" class="coolbg">&nbsp;删除&nbsp;</a>
+	<a href="<%=basePath %>excelServlet" class="coolbg">&nbsp;导出Excel&nbsp;</a>
+</td>
+</tr>
+<tr align="right" bgcolor="#EEF4EA">
+	<!-- ------------------------------分页代码，有时间可以改成EL表达式-------------------------------- -->
+		<%    		
+    		Basicer basicer=(Basicer)request.getAttribute("basicer");//通过"user"得到封装着部分信息的user
+    		//计算下一页的值
+    		int nextPage=1;    		
+    		//注：总页数已在javabean里封装对象里算出了值
+    		if(basicer.getCurrentPage()==basicer.getTotalPage()){	//如果当前页已经是最后一页则不加值,始终等于最后一页
+    			nextPage=basicer.getCurrentPage();
+    		}else{
+    			nextPage=basicer.getCurrentPage()+1; 				//下一页计算的值 
+    		}
+    		
+    		//计算上一页的值 
+    		int upPage=1;
+    		if(basicer.getCurrentPage()>1)
+    			upPage=basicer.getCurrentPage()-1;
+    	 %>
+	<td height="36" colspan="12" align="center">
+	<!-- ----------------------------链接里传的参是为了有搜索条件的分页------------------------------------------- -->
+		<a href="<%=basePath%>basicServlet?currentPage=1&acon=${conditon }&akey=${key }&aorder=${order }" >＜＜首页</a> 
+	    <a href="<%=basePath%>basicServlet?currentPage=<%=upPage%>&acon=${conditon }&akey=${key }&aorder=${order }">＜上一页 </a> 
+	    <a href="<%=basePath%>basicServlet?currentPage=<%=nextPage%>&acon=${conditon }&akey=${key }&aorder=${order }">下一页＞</a>  
+	    <a href="<%=basePath%>basicServlet?currentPage=<%=basicer.getTotalPage()%>&acon=${conditon }&akey=${key }&aorder=${order }">尾页＞＞</a>
+	</td>
+</tr>
+</table>
+
+</form>
+ <!-- -----------------处理搜索表单值的回写：下拉框--------------- -->
+<script type="text/javascript">	
+	//处理搜索条件下拉框
+	function checkcon(){	
+	var a=document.getElementById("condition");		
+		var Arrays=a.options;//数组
+		var older=document.getElementById("hides").value;
+		for(var j=0;j<Arrays.length;j++){
+		
+			if(older==Arrays[j].value){
+				Arrays[j].selected=true;
+				break;
+			}
+		}
+		
+	}
+	//处理排序下拉框
+	function check(){
+		var aa=document.getElementById("orderby");		
+		var Array=aa.options;//数组
+		var old=document.getElementById("hid").value;
+		for(var i=0;i<Array.length;i++){
+			if(old==Array[i].value){
+				Array[i].selected=true;
+				break;
+			}
+		}
+	}
+	
+	checkcon();	//调用，调用就表示触发
+	check();	//调用，调用就表示触发
+</script> 
+
+</body>
+</html>

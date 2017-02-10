@@ -1,0 +1,81 @@
+package com.zrgk.purview.model;
+
+import com.zrgk.utils.Page;
+
+
+public class Menu extends Page{
+
+	 private int mid;
+	 
+	 private String menuNum;
+	 
+	 private String menuName;
+	 
+	 private int parentId;
+	 
+	 private String menuPath;
+	 
+	 private String remark;
+	 
+	 private int state;
+
+	public int getMid() {
+		return mid;
+	}
+
+	public void setMid(int mid) {
+		this.mid = mid;
+	}
+
+	public String getMenuNum() {
+		return menuNum;
+	}
+
+	public void setMenuNum(String menuNum) {
+		this.menuNum = menuNum;
+	}
+
+	public String getMenuName() {
+		return menuName;
+	}
+
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
+	}
+
+	public int getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
+	}
+
+	public String getMenuPath() {
+		return menuPath;
+	}
+
+	public void setMenuPath(String menuPath) {
+		this.menuPath = menuPath;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
+	 
+ 
+
+}

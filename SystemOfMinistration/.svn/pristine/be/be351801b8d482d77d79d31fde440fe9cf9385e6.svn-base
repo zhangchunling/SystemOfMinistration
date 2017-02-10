@@ -1,0 +1,217 @@
+/*function saveForm(){
+	 
+		NewUpdateRole();			
+			//js提交表单
+			document.getElementById("form2").submit();
+		}
+
+*/
+
+
+
+function addRole() {
+ 
+	window.location.href = "addMenu.Servlet";
+
+}
+
+function lookRole() {
+
+	var menus = document.getElementById("menus").value;// 1,2,3
+	// 得到servlet传过来的爱好拼接串
+	var menusArray = menus.split(",");// 把1,2,3转成一个数组方便下面处理
+	var menu = document.getElementsByName("menu");// 得到爱好数组
+	for ( var i = 0; i < menu.length; i++) {
+		for ( var j = 0; j < menusArray.length; j++) {
+			if (menu[i].value == menusArray[j]) {
+				menu[i].checked = true;
+				break;
+			}
+		}
+	}
+
+}
+
+function addRolejs() {
+
+	var menuArr = document.getElementsByName("menu");
+
+	var menuStr = "";
+
+	for ( var i = 0; i < menuArr.length; i++) {
+		var checkbox = menuArr[i];
+		if (checkbox.checked) {
+
+			menuStr = menuStr + checkbox.value + ",";
+		}
+	}
+	document.getElementById("menus").value = menuStr.substring(0,
+			menuStr.length - 1);
+
+//	=================角色增加表单的校验===========================
+	
+	var roleNum = document.getElementById("roleNum");
+	var msgRoleNum = document.getElementById("msgRoleNum");
+	if (roleNum == null || roleNum.value == null || roleNum.value == "") {
+		msgRoleNum.innerHTML = "角色编号不能为空";
+		msgRoleNum.style.color = "red";
+		roleNum.focus();
+		return false;
+	}
+	 
+	var roleName = document.getElementById("roleName");
+	var msgRoleName = document.getElementById("msgRoleName");
+	if (roleName == null || roleName.value == null || roleName.value == "") {
+		msgRoleName.innerHTML = "角色名称不能为空";
+		msgRoleName.style.color = "red";
+		roleName.focus();
+		return false;
+	}
+//	======================================================
+	 
+	
+}
+
+function allSelect() {
+
+	var allSelect = document.getElementsByName("id");
+
+	for ( var i = 0; i < allSelect.length; i++) {
+		allSelect[i].checked = true;
+
+	}
+}
+function allNoSelect() {
+
+	var allSelect = document.getElementsByName("id");
+
+	for ( var i = 0; i < allSelect.length; i++) {
+		if (allSelect[i].checked == true) {
+
+			allSelect[i].checked = false;
+
+		} else {
+			allSelect[i].checked = true;
+
+		}
+	}
+
+}
+
+function getRid() {
+	if (confirm("确定要禁用吗？？？？？")) {
+		
+
+				var rid = "";
+		var flag = false;
+		var allSelect = document.getElementsByName("id");
+		for ( var i = 0; i < allSelect.length; i++) {
+			if (allSelect[i].checked == true) {
+
+				rid = rid + allSelect[i].value + ",";
+				flag = true;
+
+			}
+		}
+		if (flag) {
+			rids = rid.substring(0, rid.length - 1);
+			window.location.href = "cancelRole.Servlet?rid=" + rids;
+		}
+	}
+}
+
+function updateRole() {
+//刚进入时的回写
+	//状态的回写
+	var states = document.getElementById("states").value;
+	var state = document.getElementById("state");// 得到select下拉框对象
+	var opts = state.options;// 得到所有option数组
+	for ( var i = 0; i < opts.length; i++) {
+		if (opts[i].value == states) {
+			opts[i].selected = true;
+			break;
+		}
+	}
+	
+//	菜单资源的回写
+	var menus = document.getElementById("menus").value;// 1,2,3
+	var menusArray = menus.split(","); 
+	var menu = document.getElementsByName("menu");  
+	for ( var i = 0; i < menu.length; i++) {
+		for ( var j = 0; j < menusArray.length; j++) {
+			if (menu[i].value == menusArray[j]) {
+				menu[i].checked = true;
+				break;
+			}
+		}
+	}
+	
+	 
+
+}
+function deleteRole(id){
+	if (confirm("确认要删除吗？？？")) {
+		
+		window.location.href="deleteRole.Servlet?rid="+id;
+	}
+	
+	
+	 
+}
+
+function NewUpdateRole() {
+//	修改后的回写
+ 
+	
+//	菜单栏的回写赋值方法
+	var menuArr = document.getElementsByName("menu");
+	var menuStr = "";
+
+	for ( var i = 0; i < menuArr.length; i++) {
+		var checkbox = menuArr[i];
+		if (checkbox.checked) {
+			menuStr = menuStr + checkbox.value + ",";
+		}
+	}
+	document.getElementById("menus").value = menuStr.substring(0,
+			menuStr.length - 1);
+
+	
+	
+//	状态的回写方法
+	var stateArr = document.getElementsByName("state");
+	for ( var i = 0; i < stateArr.length; i++) {
+		var checkbox = stateArr[i];
+
+		if (stateArr.value == checkbox.value) {
+			 
+			checkbox.selected = true;
+			break;
+		}
+	}
+//	==============修改表单的校验=========================
+	
+	
+
+	var roleNum = document.getElementById("roleNum");
+	var msgRoleNum = document.getElementById("msgRoleNum");
+	if (roleNum == null || roleNum.value == null || roleNum.value == "") {
+		msgRoleNum.innerHTML = "角色编号不能为空";
+		msgRoleNum.style.color = "red";
+		roleNum.focus();
+		return false;
+	}
+	 
+	var roleName = document.getElementById("roleName");
+	var msgRoleName = document.getElementById("msgRoleName");
+	if (roleName == null || roleName.value == null || roleName.value == "") {
+		msgRoleName.innerHTML = "角色名称不能为空";
+		msgRoleName.style.color = "red";
+		roleName.focus();
+		return false;
+	}
+	
+	
+	 
+
+}

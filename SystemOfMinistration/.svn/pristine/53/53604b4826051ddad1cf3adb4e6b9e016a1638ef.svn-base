@@ -1,0 +1,46 @@
+package com.zrgk.myinfo.servlet;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.zrgk.myinfo.model.Employee;
+import com.zrgk.myinfo.service.ModpasswordServiceInter;
+import com.zrgk.myinfo.service.ProServiceInter;
+import com.zrgk.myinfo.service.impl.ModpasswordServiceImpl;
+import com.zrgk.myinfo.service.impl.ProServiceImpl;
+/**
+ * 根据用户名查询用户密码的servlet
+ * @author samson
+ * 2015-06-03
+ */
+//通过继承HttpServlet将这个普通类变成servlet类
+public class QueryEmployeeByusernameServlet extends HttpServlet{
+
+	private static final long serialVersionUID = 7117526835523907130L;
+	//实例化service
+	ModpasswordServiceInter pro=new ModpasswordServiceImpl();
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request,response);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+				//设置request的编码格式
+				request.setCharacterEncoding("utf-8");
+				//设置response编码格式
+				response.setContentType("text/html;charset=utf-8");
+				String userName=request.getParameter("username");
+				Employee em=pro.queryemployeeByUsername(userName);
+				//向request存Employee的详细信息,
+				
+	}
+	
+	
+}

@@ -1,0 +1,98 @@
+package com.zrgk.clientinfo.dao.impl;
+
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.zrgk.clientinfo.dao.UsersDaoInter;
+import com.zrgk.clientinfo.model.Users;
+import com.zrgk.utils.JdbcUtil;
+
+
+
+
+
+/**
+ * 客户信息dao层实现 类
+ * @author Simone
+ * 2015-06-07
+ */
+public class UsersDaoImpl extends JdbcUtil implements UsersDaoInter  {
+
+	@Override
+	public void insertUser(Users user) {
+		String sql="insert into users(customerName,companyName,addTime,customerTel,companyAddress,companyTel,companyIntroduction,remark) value(?,?,?,?,?,?,?,?)";
+		//封闭参数
+		List<Object> params=new ArrayList<Object>();
+	
+		params.add(user.getCustomerName());
+		params.add(user.getCompanyName());
+		params.add(user.getAddTime());
+		params.add(user.getCustomerTel());
+		params.add(user.getCompanyAddress());
+		params.add(user.getCompanyTel());
+		params.add(user.getCompanyIntroduction());
+		params.add(user.getRemark());
+
+		this.doPst(params, sql);//调用插入数据库的执行方法
+	}
+
+
+
+	//查询
+	public List<Users> queryUsers(Users user) {
+		List<Users> list=new ArrayList<Users>();
+		List<Object> olist=new ArrayList<Object>();
+		StringBuffer sql=new StringBuffer("select customerName,companyName,addTime,customerTel,companyAddress,companyTel,companyIntroduction,remark where 1=1 ");//需要根据数据库里面的字段和查询的页面 改
+	
+		//查询 用户名不能为空，
+		if(user!=null&&user.getCustomerName()!=null&&!"".equals(user.getCustomerName().trim())){
+			 sql.append(" and userName like ?"); //拼接根据用户名来模糊查询的sql
+			 olist.add("%"+user.getCustomerName()+"%");//向参数集合放值 
+		 }
+		 
+		System.out.println(sql.toString());
+		 //调用查询数据库的方法
+		 ResultSet rs=this.queryByPst(olist,sql.toString());		
+		try{
+			 if(rs!=null){
+				 while(rs.next()){
+					 Users u=new Users();
+					 u.setCid(rs.getInt("cid"));
+					 u.setCustomerName(rs.getString("customerName"));
+					 u.setCompanyName(rs.getString("companyName"));
+					 u.setAddTime(rs.getString("addTime"));
+					 u.setCustomerTel(rs.getString("customerTel"));
+					 u.setCompanyAddress(rs.getString("companyAddress"));
+					 u.setCompanyTel(rs.getString("companyTel"));
+					 u.setCompanyIntroduction(rs.getString("companyIntroduction"));
+					 u.setRemark(rs.getString("remark"));
+					 
+					 list.add(u);
+				 }
+			 }
+		 }catch(Exception ex){
+			 ex.printStackTrace();
+		 }finally{
+			 this.closeAll();//关闭连接
+		 }
+		return list;
+	}
+
+
+
+	
+
+/*	//删除
+	
+	@Override
+	public void deleteUser(int uid) {
+		String sql="delete from users where uid=?";
+		 List<Object> olist=new ArrayList<Object>();//组装参数的集合
+		 olist.add(uid);
+		 this.doPst(sql, olist);
+		
+	}*/
+
+
+}

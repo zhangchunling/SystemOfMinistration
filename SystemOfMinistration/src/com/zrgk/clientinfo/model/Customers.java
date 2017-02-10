@@ -1,0 +1,102 @@
+package com.zrgk.clientinfo.model;
+
+import java.io.Serializable;
+
+
+/**
+ * 客户相关信息的javaBean
+ * @author Simone
+ * 2015-06-07
+ */
+public class Customers extends page implements Serializable{
+	
+	private int cid;
+	private String customerName;
+	private String companyName;
+	private String addTime;
+	private String customerTel;
+	private String companyAddress;
+	private String companyTel;
+	private String companyIntroduction;
+	private String remark;
+	
+	private String keyWord;
+	private String sell; 
+	private String time;
+	
+	public String getKeyWord() {
+		return keyWord;
+	}
+	public void setKeyWord(String keyWord) {
+		this.keyWord = keyWord;
+	}
+	public String getSell() {
+		return sell;
+	}
+	public void setSell(String sell) {
+		this.sell = sell;
+	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
+	
+	
+	public int getCid() {
+		return cid;
+	}
+	public void setCid(int cid) {
+		this.cid = cid;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+	public String getAddTime() {
+		return addTime;
+	}
+	public void setAddTime(String addTime) {
+		this.addTime = addTime;
+	}
+	public String getCustomerTel() {
+		return customerTel;
+	}
+	public void setCustomerTel(String customerTel) {
+		this.customerTel = customerTel;
+	}
+	public String getCompanyAddress() {
+		return companyAddress;
+	}
+	public void setCompanyAddress(String companyAddress) {
+		this.companyAddress = companyAddress;
+	}
+	public String getCompanyTel() {
+		return companyTel;
+	}
+	public void setCompanyTel(String companyTel) {
+		this.companyTel = companyTel;
+	}
+	public String getCompanyIntroduction() {
+		return companyIntroduction;
+	}
+	public void setCompanyIntroduction(String companyIntroduction) {
+		this.companyIntroduction = companyIntroduction;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	
+}

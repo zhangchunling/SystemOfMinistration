@@ -1,0 +1,184 @@
+function saveForm() {
+	var flag = addMenuJs();
+	if (flag == false) {
+
+	} else {
+		document.getElementById("form2").submit();
+	}
+
+}
+// ////////////////增加表单的校验//////////////////////
+function deleteMenu() {
+	var mid = document.getElementById("mid").value;
+	confirm("确认要删除吗？？？");
+	window.location.href = "deleteMenu.Servlet?mid=" + mid;
+
+}
+
+function addMenuJs() {
+	var menuNum = document.getElementById("menuNum");
+	var msgMenuNum = document.getElementById("msgMenuNum");
+	if (menuNum == null || menuNum.value == null || menuNum.value == "") {
+		msgMenuNum.innerHTML = "编号不能为空";
+		msgMenuNum.style.color = "red";
+		menuNum.focus();
+		return false;
+	}
+
+	var menuName = document.getElementById("menuName");
+	var msgMenuName = document.getElementById("msgMenuName");
+	if (menuName == null || menuName.value == null || menuName.value == "") {
+		msgMenuName.innerHTML = "菜单名不能为空";
+		msgMenuName.style.color = "red";
+		menuName.focus();
+		return false;
+	}
+	var menuPath = document.getElementById("menuPath");
+	var msgMenuPath = document.getElementById("msgMenuPath");
+	if (menuPath == null || menuPath.value == null || menuPath.value == "") {
+		msgMenuPath.innerHTML = "路径名不能为空";
+		msgMenuPath.style.color = "red";
+		menuPath.focus();
+		return false;
+	}
+
+	// ===============修改菜单的校验===================================
+
+	function updateMenuJs() {
+
+		var menuNum = document.getElementById("menuNum");
+		var msgMenuNum = document.getElementById("msgMenuNum");
+		if (menuNum == null || menuNum.value == null || menuNum.value == "") {
+			msgMenuNum.innerHTML = "编号不能为空";
+			msgMenuNum.style.color = "red";
+			menuNum.focus();
+			return false;
+		}
+
+		var menuName = document.getElementById("menuName");
+		var msgMenuName = document.getElementById("msgMenuName");
+		if (menuName == null || menuName.value == null || menuName.value == "") {
+			msgMenuName.innerHTML = "菜单名不能为空";
+			msgMenuName.style.color = "red";
+			menuName.focus();
+			return false;
+		}
+		var menuPath = document.getElementById("menuPath");
+		var msgMenuPath = document.getElementById("msgMenuPath");
+		if (menuPath == null || menuPath.value == null || menuPath.value == "") {
+			msgMenuPath.innerHTML = "路径名不能为空";
+			msgMenuPath.style.color = "red";
+			menuPath.focus();
+			return false;
+		}
+
+	}
+
+}
+function addMenu() {
+
+	window.location.href = "addParentIdQuery.Servlet";
+
+}
+
+function lookRole() {
+
+	var menus = document.getElementById("menus").value;// 1,2,3
+	// 得到servlet传过来的爱好拼接串
+	var menusArray = menus.split(",");// 把1,2,3转成一个数组方便下面处理
+	var menu = document.getElementsByName("menu");// 得到爱好数组
+	for ( var i = 0; i < menu.length; i++) {
+		for ( var j = 0; j < menusArray.length; j++) {
+			if (menu[i].value == menusArray[j]) {
+				menu[i].checked = true;
+				break;
+			}
+		}
+	}
+
+}
+
+function addRolejs() {
+
+	var menuArr = document.getElementsByName("menu");
+
+	var menuStr = "";
+
+	for ( var i = 0; i < menuArr.length; i++) {
+		var checkbox = menuArr[i];
+		if (checkbox.checked) {
+
+			menuStr = menuStr + checkbox.value + ",";
+		}
+	}
+	document.getElementById("menus").value = menuStr.substring(0,
+			menuStr.length - 1);
+
+}
+
+function allSelect() {
+
+	var allSelect = document.getElementsByName("id");
+
+	for ( var i = 0; i < allSelect.length; i++) {
+		allSelect[i].checked = true;
+
+	}
+}
+function allNoSelect() {
+
+	var allSelect = document.getElementsByName("id");
+
+	for ( var i = 0; i < allSelect.length; i++) {
+		if (allSelect[i].checked == true) {
+
+			allSelect[i].checked = false;
+
+		} else {
+			allSelect[i].checked = true;
+
+		}
+	}
+
+}
+
+function getMid() {
+
+	var mid = "";
+	var flag = false;
+	var allSelect = document.getElementsByName("id");
+	for ( var i = 0; i < allSelect.length; i++) {
+		if (allSelect[i].checked == true) {
+
+			mid = mid + allSelect[i].value + ",";
+			flag = true;
+
+		}
+	}
+	if (flag) {
+
+		mids = mid.substring(0, mid.length - 1);
+		window.location.href = "cancelMenu.Servlet?mid=" + mids;
+	}
+}
+
+function updateMenu() {
+	// 刚进入时的回写
+	// 父id 的回写
+
+	var parentIds = document.getElementById("parentIds").value;
+	var parentId = document.getElementById("parentId");// 得到select下拉框对象
+	var opts = parentId.options;// 得到所有option数组
+	for ( var i = 0; i < opts.length; i++) {
+		if (opts[i].value == parentIds) {
+			opts[i].selected = true;
+			break;
+		}
+	}
+
+}
+
+function saveFormUpdate() {
+	// js提交表单
+	document.getElementById("form2").submit();
+}

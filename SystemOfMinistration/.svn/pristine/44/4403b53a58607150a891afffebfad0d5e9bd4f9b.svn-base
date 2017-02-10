@@ -1,0 +1,85 @@
+package com.zrgk.clientinfo.model;
+
+import java.io.Serializable;
+
+
+
+/**
+ * 客户相关信息的javaBean
+ * @author Simone
+ * 2015-06-07
+ */
+public class Users implements Serializable{
+	
+	private static final long serialVersionUID = 2962463425026506372L;//生成一个识别码方便在网速中传输 保证 数据准确性
+
+	private int cid;
+	private String customerName;
+	private String companyName;
+	private String addTime;
+	private String customerTel;
+	private String companyAddress;
+	private String companyTel;
+	private String companyIntroduction;
+	private String remark;
+	public int getCid() {
+		return cid;
+	}
+	public void setCid(int cid) {
+		this.cid = cid;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+	public String getAddTime() {
+		return addTime;
+	}
+	public void setAddTime(String addTime) {
+		this.addTime = addTime;
+	}
+	public String getCustomerTel() {
+		return customerTel;
+	}
+	public void setCustomerTel(String customerTel) {
+		this.customerTel = customerTel;
+	}
+	public String getCompanyAddress() {
+		return companyAddress;
+	}
+	public void setCompanyAddress(String companyAddress) {
+		this.companyAddress = companyAddress;
+	}
+	public String getCompanyTel() {
+		return companyTel;
+	}
+	public void setCompanyTel(String companyTel) {
+		this.companyTel = companyTel;
+	}
+	public String getCompanyIntroduction() {
+		return companyIntroduction;
+	}
+	public void setCompanyIntroduction(String companyIntroduction) {
+		this.companyIntroduction = companyIntroduction;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
+	
+}

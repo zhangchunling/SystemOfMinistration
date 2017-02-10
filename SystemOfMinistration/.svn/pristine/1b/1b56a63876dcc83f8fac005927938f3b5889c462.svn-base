@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>SystemOfMinistration</display-name>
+  
+  <!--关于发信息的sevlet的配置信息 :以下是樊丙富的servlet -->
+  <servlet>
+  	<servlet-name>uploadFileSevlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.UploadFileSevlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>uploadFileSevlet</servlet-name>
+  	<url-pattern>/up.servlet</url-pattern>
+  </servlet-mapping>
+  
+   <!--关于发件箱的sevlet的配置信息  -->
+  <servlet>
+  	<servlet-name>queryMailBoxServlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.QueryMailBoxServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>queryMailBoxServlet</servlet-name>
+  	<url-pattern>/query.servlet</url-pattern>
+  </servlet-mapping>
+  
+   <!--关于收件箱的sevlet的配置信息  -->
+  <servlet>
+  	<servlet-name>qMailBoxServlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.QMailBoxServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>qMailBoxServlet</servlet-name>
+  	<url-pattern>/q.servlet</url-pattern>
+  </servlet-mapping>
+  
+  
+    <!-- 关于发件箱删除操作的servlet配置 -->
+  <servlet>
+  	<servlet-name>deleteMailBoxServlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.DeleteMailBoxServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>deleteMailBoxServlet</servlet-name>
+  	<url-pattern>/deleteMailBoxServlet</url-pattern>
+  </servlet-mapping>
+     <!-- 关于收件箱删除操作的servlet配置 -->
+  <servlet>
+  	<servlet-name>dMailBoxServlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.DMailBoxServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>dMailBoxServlet</servlet-name>
+  	<url-pattern>/dMailBoxServlet</url-pattern>
+  </servlet-mapping>
+  
+   <!-- 关于发件箱导出excel的servlet配置 -->
+  <servlet>
+  	<servlet-name>sendExcelServlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.SendExcelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>sendExcelServlet</servlet-name>
+  	<url-pattern>/portProductServlet</url-pattern>
+  </servlet-mapping>
+  
+   <!-- 关于收件箱导出excel的servlet配置 -->
+  <servlet>
+  	<servlet-name>giveExcelServlet</servlet-name>
+  	<servlet-class>com.zrgk.infobox.servlet.GiveExcelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>giveExcelServlet</servlet-name>
+  	<url-pattern>/ExcelServlet</url-pattern>
+  </servlet-mapping>
+  
+  <!--1.信息管理相关servlet:以下的servlet是张春玲的 -->
+  <!-- 配置添加新项目的servelt -->
+  <servlet>
+  	<servlet-name>basicInsert</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Basic_InsertServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>basicInsert</servlet-name>
+  	<url-pattern>/basicInsertServlet</url-pattern>
+  </servlet-mapping>
+  <!-- 配置主页面的servlet -->
+  <servlet>
+  	<servlet-name>basic</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Basic_Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>basic</servlet-name>
+  	<url-pattern>/basicServlet</url-pattern>
+  </servlet-mapping>
+  <!-- 配置编辑用的servlet -->
+  <servlet>
+  	<servlet-name>basicEdit</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Basic_EditServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>basicEdit</servlet-name>
+  	<url-pattern>/basicEditServlet</url-pattern>
+  </servlet-mapping>
+  <!-- 配置更新的servlet -->
+  <servlet>
+  	<servlet-name>basicUpdate</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Basic_UpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>basicUpdate</servlet-name>
+  	<url-pattern>/basicUpdateServlet</url-pattern>
+  </servlet-mapping>
+  <!-- 配置查看详情的servlet -->
+  <servlet>
+  	<servlet-name>basicLook</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Basic_LookServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>basicLook</servlet-name>
+  	<url-pattern>/basicLookServlet</url-pattern>
+  </servlet-mapping>
+   <!-- 配置返回主页面时查回数据的servlet -->
+  <servlet>
+  	<servlet-name>basicQueryAll</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Basic_LookServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>basicQueryAll</servlet-name>
+  	<url-pattern>/basicQueryAllServlet</url-pattern>
+  </servlet-mapping>
+   <!-- 配置删除的servlet -->
+  <servlet>
+  	<servlet-name>basicDelete</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Basic_DeleteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>basicDelete</servlet-name>
+  	<url-pattern>/basicDeleteServlet</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 配置导出Excel的servlet -->
+  <servlet>
+  	<servlet-name>excelServlet</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Basic_ExportExcelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>excelServlet</servlet-name>
+  	<url-pattern>/excelServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+ <!-- 2.信息管理相关servlet：张春玲 -->
+  <!-- 配置添加新需求的servelt -->
+  <servlet>
+  	<servlet-name>needInsert</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Need_InsertServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>needInsert</servlet-name>
+  	<url-pattern>/needInsertServlet</url-pattern>
+  </servlet-mapping> 
+  <!-- 配置主页面的servlet -->
+  <servlet>
+  	<servlet-name>need</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Need_Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>need</servlet-name>
+  	<url-pattern>/needServlet</url-pattern>
+  </servlet-mapping>
+  <!-- 配置编辑用的servlet -->
+  <servlet>
+  	<servlet-name>needEdit</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Need_EditServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>needEdit</servlet-name>
+  	<url-pattern>/needEditServlet</url-pattern>
+  </servlet-mapping>
+   <!-- 配置获取项目名称的servlet -->
+  <servlet>
+  	<servlet-name>choice</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Need_ChoiceServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>choice</servlet-name>
+  	<url-pattern>/needChoiceServlet</url-pattern>
+  </servlet-mapping>
+  <!-- 配置更新的servlet -->
+  <servlet>
+  	<servlet-name>needUpdate</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Need_UpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>needUpdate</servlet-name>
+  	<url-pattern>/needUpdateServlet</url-pattern>
+  </servlet-mapping>
+   <!-- 配置查看详情的servlet -->
+  <servlet>
+  	<servlet-name>needLook</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Need_LookServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>needLook</servlet-name>
+  	<url-pattern>/needLookServlet</url-pattern>
+  </servlet-mapping>
+   <!-- 配置删除的servlet -->
+  <servlet>
+  	<servlet-name>needDelete</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Need_DeleteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>needDelete</servlet-name>
+  	<url-pattern>/needDeleteServlet</url-pattern>
+  </servlet-mapping>
+ 
+ <!-- 3.模块信息的servlet -->
+   <!-- 配置主页面的servlet -->
+  <servlet>
+  	<servlet-name>cake</servlet-name>
+  	<servlet-class>com.zrgk.project.servlet.Cake_Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>cake</servlet-name>
+  	<url-pattern>/cakeServlet</url-pattern>
+  </servlet-mapping> 
+   <!-- 以上的servlet是张春玲的 -->
+   
+   
+   <!-- 信息查询配置 -->
+  <servlet>
+  <servlet-name>queryEmployeeServlet</servlet-name>
+  <servlet-class>com.zrgk.myinfo.servlet.QueryEmployeeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>  
+  <servlet-name>queryEmployeeServlet</servlet-name> 
+  <url-pattern>/queryEmployeeServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+   <!-- 配置过滤器 -->
+  <filter>
+  	<filter-name>sessionFilter</filter-name>
+  	<filter-class>com.zrgk.myinfo.Filter.MyFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>sessionFilter</filter-name>
+  	<url-pattern>*.action</url-pattern><!-- 代表的是过滤所有请求服务的路径 -->
+  </filter-mapping>
+  
+    <!-- 登录的servlet配置 -->
+    <servlet>
+    <servlet-name>loginServlet</servlet-name>
+    <servlet-class>com.zrgk.myinfo.servlet.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    <servlet-name>loginServlet</servlet-name>
+    <url-pattern>/loginServlet</url-pattern>
+    </servlet-mapping> 
+     <!-- 生成验证码的servlet配置 -->
+  <servlet>
+  <servlet-name>getKeyServlet</servlet-name>
+  <servlet-class>com.zrgk.utils.GetKey</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>getKeyServlet</servlet-name>
+  <url-pattern>/getKey</url-pattern>
+  </servlet-mapping>
+  
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

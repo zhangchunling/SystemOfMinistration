@@ -1,0 +1,127 @@
+
+//校验插入信息
+		//得到焦点触发的方法
+		function check_Getplan(){
+			//清空文本框的value值
+			document.getElementById("planOption").value="";
+			document.getElementById("msg_po").innerHTML="任务标题不能为空！";
+		}
+		//文本框失去焦点触发的方法
+		function check_Loseplan(){
+			//清空文本框的value值
+			var planOption=document.getElementById("planOption");
+			if(planOption==null||planOption.value==null||planOption.value.trim()==""){
+				document.getElementById("msg_po").innerHTML="任务标题不能为空！";
+				//设置文本框变成红色
+				planOption.className="red_css";//js改操作样式表css
+				document.getElementById("msg_po").style.color="red";//js操作标签里属性里属性值
+			}
+		}
+
+
+function check_Getdetail(){			
+	//清空文本框的value值
+	document.getElementById("DetailExplain").value="";
+	alert("详细说明不能为空！");
+	return false;
+}
+
+function check_Losedetail(){
+	
+	var DetailExplain=document.getElementById("DetailExplain");
+	if(DetailExplain==null||DetailExplain.value==null||DetailExplain.value.trim()==""){
+		alert("详细说明不能为空！");
+		return false;
+	}
+}		
+
+//验证   页面中如果有红色提示，则不能提交
+function check_form(){
+	
+	//清空文本框的value值
+	var planOption=document.getElementById("planOption");
+	if(planOption==null||planOption.value==null||planOption.value.trim()==""){
+		document.getElementById("msg_po").innerHTML="任务标题不能为空！";
+		//设置文本框变成红色
+		planOption.className="red_css";//js改操作样式表css
+		document.getElementById("msg_po").style.color="red";//js操作标签里属性里属性值
+	}
+	
+	//详细说明
+	var DetailExplain=document.getElementById("DetailExplain");
+	if(DetailExplain==null||DetailExplain.value==null||DetailExplain.value.trim()==""){
+		alert("详细说明不能为空！");
+	}
+}
+
+function keyup(){
+	var planOption=document.getElementById("planOption");//通过id得到name并赋name
+	if(planOption!=null&&planOption.value!=null&&planOption.value!=""){//判断如果name不等于空的话
+		planOption.className="green_css";//将用户名文本框变为绿色
+//		document.getElementById("msg_po").style.color="green";//将后方显示的文字变为绿色		
+			document.getElementById("msg_po").innerHTML="√";//后方显示绿色的√
+		}else{//如果不符合
+			document.getElementById("msg_po").innerHTML="任务标题不能为空！";//后方显示用户名输入有误
+			name.className="red_css";//将用户名框变为红色
+			document.getElementById("msg_po").style.color="red";//后方显示的文字变为红色
+		}	
+	
+}
+
+function addTask(){
+	
+	window.location.href="jsp/jsp_task/task.jsp";
+}
+
+function addReferenceSites(){
+	 var res=document.getElementsByName("referenceSite");
+	 
+	 var reStr="";
+	 for ( var i = 0; i < res.length; i++) {
+		var checkbox=res[i];
+		 if (checkbox.selected) {
+			reStr=reStr+checkbox.value+",";
+			break;
+		}
+		 
+	}
+	 document.getElementById("referenceSites").value=reStr.substring(0, reStr.length-1);
+	 
+}
+
+//任务更新
+function upadateTask(){
+	
+//	执行者的下拉框
+	var executor=document.getElementById("executor").value();
+	var psosition=document.getElementById("position");//得到select下拉框对象
+	var opts = position.options;// 得到所有option数组
+	
+	for ( var i = 0; i < opts.length; i++) {
+		if (opts[i].value == executor) {
+
+			opts[i].selected = true;
+
+			break;
+		}
+	}
+	
+//	优先级的下拉框
+	var grade=document.getElementById("grade").value();
+	var position=document.getElementById("position");//得到select下拉框对象
+	var opts = position.options;// 得到所有option数组
+	
+	for ( var i = 0; i < opts.length; i++) {
+		if (opts[i].value == gtaskGrade) {
+
+			opts[i].selected = true;
+
+			break;
+		}
+	}
+}
+
+function save(){
+	
+	alert("保存成功！");
+}

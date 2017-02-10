@@ -1,0 +1,166 @@
+package com.zrgk.project.dao.impl;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import com.zrgk.project.dao.CakeDaoInter;
+import com.zrgk.project.model.Basicer;
+import com.zrgk.project.model.Caker;
+import com.zrgk.utils.JdbcUtil;
+
+/**
+ * 
+ * @function: dao层，增删改查实现类
+ * @author: 张春玲
+ * @time: 2015-6-8
+ * 
+ */
+public class CakerDaoImpl extends JdbcUtil implements CakeDaoInter {
+
+	// 插入方法
+	public boolean insertCaker(Caker caker) {
+		boolean flag = true;
+		String sql = "insert into need_sheet(cakeName,need_id,priority,createTime,updateTime,simpleStatement,detail," +
+				"comment,updatePeople,addPeople) value(?,?,?,?,?,?,?,?,?,?)";
+		//按表顺序组装绑定问号的值
+		List<Object> olist = new ArrayList<Object>();
+		olist.add(caker.getCakeName());
+		olist.add(caker.getNeed_id());
+		olist.add(caker.getPriority());
+		olist.add(caker.getCreateTime());
+		olist.add(caker.getUpdateTime());
+		olist.add(caker.getSimpleStatement());	
+		olist.add(caker.getDetail());
+		olist.add(caker.getComment());
+		olist.add(caker.getUpdatePeople());
+		olist.add(caker.getAddPeople());
+			
+		this.doPst(olist, sql); //执行插入
+		this.closeAll();		//关闭资源
+		return flag;			//返回插入是否成功
+	}
+
+	public void deleteCaker(int pid) {
+		// TODO Auto-generated method stub
+
+	}
+
+	//更新数据方法
+	public boolean updateCaker(Caker ba) {
+		String sql="update need_sheet set cakeName=?,need_id=?,priority=?,createTime=?,updateTime=?,simpleStatement=?," +
+				"detail=?,comment=?,updatePeople=?,addPeople=? where cid=?";
+				//赋绑定问号的值 
+		List<Object> list=new ArrayList<Object>();		
+		list.add(ba.getCakeName());
+		list.add(ba.getNeed_id());
+		list.add(ba.getPriority());
+		list.add(ba.getCreateTime());
+		list.add(ba.getUpdateTime());
+		list.add(ba.getSimpleStatement());
+		list.add(ba.getDetail());
+		list.add(ba.getComment());		
+		list.add(ba.getUpdatePeople());
+		list.add(ba.getAddPeople());	
+		list.add(ba.getCid());
+		//调用JDBC方法
+		boolean flag=this.doPst(list, sql);
+		return flag;
+	}
+
+	
+	//查询所有信息的方法
+	public List<Caker> queryAllCaker() {
+		//新建集合对象存放查回的所有数据
+		List<Caker> list=new ArrayList<Caker>();
+		String sql="select * from need_sheet";
+		ResultSet rs=this.queryByPst(null, sql);//将查回的所有数据放进结果集
+		//封装查回的数据
+		if(rs!=null){
+			try {
+				while(rs.next()){
+					Caker bas=new Caker();
+					bas.setCid(rs.getInt("cid"));
+					bas.setCakeName(rs.getString("cakeName"));
+					bas.setNeed_id(rs.getInt("need_id"));
+					bas.setPriority(rs.getInt("priority"));
+					bas.setCreateTime(rs.getString("createTime"));
+					bas.setUpdateTime(rs.getString("updateTime"));
+					bas.setSimpleStatement(rs.getString("simpleStatement"));
+					bas.setDetail(rs.getString("detail"));
+					bas.setComment(rs.getString("comment"));
+					bas.setUpdatePeople(rs.getString("updatePeople"));					
+					bas.setAddPeople(rs.getString("addPeople"));					
+					list.add(bas);					
+				}
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		this.closeAll();	//关闭资源
+		return list;		//返回信息集合
+	}
+
+	//根据Id查询的方法
+	public Caker queryCakerById(int pid) {
+		String sql="select * from need_sheet where pid="+pid;
+		Caker bas=new Caker();
+		ResultSet rs=this.queryByPst(null, sql);
+		
+		if(rs!=null){
+			try {
+				//将查回的信息封装到javaBean里
+				while(rs.next()){		
+					bas.setCid(rs.getInt("Cid"));
+					bas.setCakeName(rs.getString("cakeName"));
+					bas.setNeed_id(rs.getInt("need_id"));
+					bas.setPriority(rs.getInt(""));
+					bas.setCreateTime(rs.getString("createTime"));
+					bas.setUpdateTime(rs.getString("updateTime"));
+					bas.setSimpleStatement(rs.getString("simpleStatement"));
+					bas.setDetail(rs.getString("detail"));
+					bas.setComment(rs.getString("comment"));
+					bas.setUpdatePeople(rs.getString("updatePeople"));					
+					bas.setAddPeople(rs.getString("addPeople"));									
+				
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return bas;
+	}
+	//查回项目名称的方法
+	public List<Basicer> queryProject() {
+		List<Basicer> list=new ArrayList<Basicer>();
+		String sql="select b.pid, b.projectName from need_sheet n,basic_info b where n.project_id=b.pid";
+		ResultSet rs=this.queryByPst(null, sql);//将查回的所有数据放进结果集
+		//封装查回的数据
+		if(rs!=null){
+			try {
+				while(rs.next()){
+					Basicer bas=new Basicer();
+					bas.setPid(rs.getInt("pid"));
+					bas.setProjectName(rs.getString("projectName"));						
+					list.add(bas);					
+				}
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		this.closeAll();	//关闭资源
+		return list;		//返回信息集合
+	}
+
+}

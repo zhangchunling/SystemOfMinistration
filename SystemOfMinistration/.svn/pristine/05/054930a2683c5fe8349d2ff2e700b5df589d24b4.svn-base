@@ -1,0 +1,56 @@
+package com.zrgk.clientinfo.service.impl;
+
+import java.util.List;
+
+import com.zrgk.clientinfo.dao.UsersDaoInter;
+import com.zrgk.clientinfo.dao.impl.UsersDaoImpl;
+import com.zrgk.clientinfo.model.Users;
+import com.zrgk.clientinfo.service.UsersServiceInter;
+
+
+
+/**
+ * 客户信息dao层实现 类
+ * @author Simone
+ * 2015-06-07
+ */
+public class UsersServiceImpl implements UsersServiceInter  {
+	UsersDaoInter usersDao=new UsersDaoImpl();
+
+	public void insertUser(Users user) {
+		//调用dao的方法
+		usersDao.insertUser(user);
+		
+	}
+
+	public List<Users> queryUsers(Users user) {
+		return usersDao.queryUsers(user);
+	}
+
+	/*public void deleteUser(int uid) {
+		usersDao.deleteUser(uid);
+		
+	}*/
+
+	/*//添加
+	@Override
+	public void insertUser(Users user) {
+		//调用dao的方法
+		usersDao.insertUser(user);
+	}
+
+	//查询
+	@Override
+	public List<Users> queryUsers(Users user) {
+		return usersDao.queryUsers(user);
+	}
+
+	//删除
+	@Override
+	public void deleteUser(int cid) {
+		usersDao.deleteUser(cid);
+
+	
+	}*/
+
+}

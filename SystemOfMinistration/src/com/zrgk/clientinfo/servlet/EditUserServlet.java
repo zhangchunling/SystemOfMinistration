@@ -1,0 +1,61 @@
+package com.zrgk.clientinfo.servlet;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.zrgk.clientinfo.model.Customers;
+import com.zrgk.clientinfo.service.UsersServiceInter;
+import com.zrgk.clientinfo.service.impl.UsersServiceImpl;
+
+/**
+ * 修改用户信息的servlet
+ * @author Simone
+ * 2015-06-10
+ */
+public class EditUserServlet extends HttpServlet {
+	
+	private static final long serialVersionUID = -2950385431307351250L;
+
+	
+	UsersServiceInter usersService=new UsersServiceImpl();
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");//设置request的编码格式 
+		response.setContentType("text/html;charset=utf-8");//设置response的编码格式 
+		
+		String companyName=request.getParameter("companyName");
+		String customerName=request.getParameter("customerName");
+		String companyAddress=request.getParameter("companyAddress");
+		String customerTel=request.getParameter("customerTel");
+		String companyTel=request.getParameter("companyTel");
+		String companyIntroduction=request.getParameter("companyIntroduction");
+		String remark=request.getParameter("remark");
+		String cid=request.getParameter("cid");
+		
+		Customers u=new Customers();
+		u.setCompanyName(companyName);
+		u.setCustomerName(customerName);
+		u.setCompanyAddress(companyAddress);
+		u.setCustomerTel(customerTel);
+		u.setCompanyTel(companyTel);
+		u.setCompanyIntroduction(companyIntroduction);
+		u.setRemark(remark);
+		if(cid!=null&&!"".equals(cid.trim())){
+			u.setCid(Integer.parseInt(cid));
+		}		
+		usersService.updateUser(u);
+		request.getRequestDispatcher("/musersListServlet.action").forward(request, response);
+	}
+	
+}

@@ -1,0 +1,152 @@
+package com.zrgk.purview.servlet.employee;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.zrgk.purview.model.EidAndRid;
+import com.zrgk.purview.model.Employee;
+import com.zrgk.purview.service.EmployeeServiceImpl;
+import com.zrgk.purview.service.EmployeeServiceInter;
+
+public class UpdateEmployeeServlet extends HttpServlet {
+
+	EmployeeServiceInter employeeService = new EmployeeServiceImpl();
+
+	@Override
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+
+		String eid = request.getParameter("eid");
+
+		System.out.println("eid=" + eid);
+
+		EidAndRid er = new EidAndRid();
+
+		if (eid != null) {
+
+			er.setE_id(Integer.parseInt(eid));
+			employeeService.deleteByRidAndMid(er);
+
+		}
+
+		String roles = request.getParameter("roles");
+
+		System.out.println("roles=" + roles);
+
+		int state = 1;
+
+		Date date = new Date();
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+		String changeTime = sdf.format(date);
+
+		System.out.println("changeTime=" + changeTime);
+
+		String position = request.getParameter("position");
+		System.out.println("position=" + position);
+
+		String name = request.getParameter("name");
+		System.out.println("name=" + name);
+
+		String sex = request.getParameter("sex");
+		System.out.println("sex=" + sex);
+
+		String age = request.getParameter("age");
+		System.out.println("age=" + age);
+
+		String tel = request.getParameter("tel");
+		System.out.println("tel=" + tel);
+
+		String entryTime = request.getParameter("entryTime");
+		System.out.println("entryTime=" + entryTime);
+
+		String cardNum = request.getParameter("cardNum");
+
+		System.out.println("cardNum=" + cardNum);
+
+		int random = new Random().nextInt(1000) + 1000;// 产生随机数
+
+		int psw = new Random().nextInt(100000) + 100000;
+
+		String password = String.valueOf(psw);
+
+		String username = "wfh" + random;
+
+		String remark = request.getParameter("remark");
+		System.out.println("remark=" + remark);
+
+		Employee em = new Employee();
+
+		if (age != null) {
+
+			em.setAge(Integer.parseInt(age));
+		}
+
+		em.setPosition(position);
+
+		em.setName(name);
+		if (sex != null) {
+
+			em.setSex(Integer.parseInt(sex));
+		}
+
+		em.setCardNum(cardNum);
+
+		em.setEntryTime(entryTime);
+
+		em.setTel(tel);
+
+		em.setRemark(remark);
+
+		em.setState(state);
+
+		em.setPassword(password);
+
+		em.setUsername(username);
+
+		em.setRoles(roles);
+
+		if (eid!=null) {
+			
+			em.setEid(Integer.parseInt(eid));
+		}
+
+		em.setChangeTime(changeTime);
+
+		if (em != null) {
+
+			String[] roleArr = roles.split(",");
+			for (int i = 0; i < roleArr.length; i++) {
+
+				er.setE_id(Integer.parseInt(eid));
+
+				er.setR_id(Integer.parseInt(roleArr[i]));
+				employeeService.addEidAndRid(er);
+			}
+
+			if (em != null) {
+
+				employeeService.UpdateEmployee(em);
+				request.getRequestDispatcher("queryAll.Servlet").forward(
+						request, response);
+			}
+
+		}
+	}
+}

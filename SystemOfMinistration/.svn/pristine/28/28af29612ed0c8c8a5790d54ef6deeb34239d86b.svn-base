@@ -1,0 +1,52 @@
+package com.zrgk.project.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.zrgk.project.dao.NeedDaoInter;
+import com.zrgk.project.dao.impl.NeederDaoImpl;
+import com.zrgk.project.model.Needer;
+import com.zrgk.project.service.NeederServiceInter;
+/**
+ * 
+ * @function: service层，增删改查实现类
+ * @author: 张春玲
+ * @time: 2015-6-4
+ *
+ */
+public class NeederServiceImpl implements NeederServiceInter{
+
+	NeedDaoInter basicDao=new NeederDaoImpl();
+	
+	
+	//插入方法
+	public boolean insertNeeder(Needer needer) {
+		boolean flag=basicDao.insertNeeder(needer);
+		return flag;
+	}
+
+	public void deleteNeeder(int pid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	//更新方法
+	public boolean updateNeeder(Needer needer) {
+		boolean flag=basicDao.updateNeeder(needer);
+		return flag;		
+	}
+
+	//查询所有方法
+	public List<Needer> queryAllNeeder() {
+		List<Needer> list=new ArrayList<Needer>();
+		list=basicDao.queryAllNeeder();		
+		return list;
+	}
+
+	//通过id查询
+	public Needer queryNeederById(int pid) {
+		Needer bas=basicDao.queryNeederById(pid);
+		return bas;
+	}
+
+}

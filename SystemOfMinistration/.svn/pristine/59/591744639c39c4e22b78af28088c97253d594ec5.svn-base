@@ -1,0 +1,84 @@
+package com.zrgk.clientinfo.servlet;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.zrgk.clientinfo.model.Customers;
+import com.zrgk.clientinfo.service.UsersServiceInter;
+import com.zrgk.clientinfo.service.impl.UsersServiceImpl;
+
+
+
+/**
+ * 用户信息的servlet
+ * @author Simone
+ * 2015-06-07
+ */
+public class UsersServlet extends HttpServlet {
+	
+	private static final long serialVersionUID = -1373186300319970177L;
+	UsersServiceInter usersService=new UsersServiceImpl();
+	
+	@Override
+	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");//设置request的编码格式 
+		response.setContentType("text/html;charset=utf-8");//设置response的编码格式 
+		
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");//获得当前的时间
+		String tim=sdf.format(new Date());
+
+		
+		//接受参数
+		String companyName=request.getParameter("companyName");
+		String customerName=request.getParameter("customerName");
+		String companyAddress=request.getParameter("companyAddress");
+		String customerTel=request.getParameter("customerTel");
+		String companyTel=request.getParameter("companyTel");
+		String companyIntroduction=request.getParameter("companyIntroduction");
+		String remark=request.getParameter("remark");
+		
+		String keyWord = request.getParameter("keyWord");
+		String sell = request.getParameter("sell");
+		/*String time=request.getParameter("time");*/
+		
+			//保存到数据库
+
+			//组装JavaBean的值 
+		Customers u=new Customers();
+		u.setCompanyName(companyName);
+		u.setCustomerName(customerName);
+		u.setCompanyAddress(companyAddress);
+		u.setCustomerTel(customerTel);
+		u.setCompanyTel(companyTel);
+		u.setCompanyIntroduction(companyIntroduction);
+		u.setRemark(remark);
+		u.setAddTime(tim);
+		u.setKeyWord(keyWord);
+		u.setSell(sell);
+		request.setAttribute("sell", sell);
+		
+		
+		if ("1".equals(sell)) {//sell的值为1时，即选中“客户所在公司名称”一值
+			u.setCompanyName("companyName");
+		}
+		if ("2".equals(sell)) {//sell的值为2时，即选中“联系人姓名”一值
+			u.setCustomerName("CustomeName"); 
+		}
+		
+		
+		
+		usersService.insertUser(u);//调用service方法
+		 		
+		request.getRequestDispatcher("/musersListServlet").forward(request, response);//成功返回的页面
+		}
+
+	
+	
+}

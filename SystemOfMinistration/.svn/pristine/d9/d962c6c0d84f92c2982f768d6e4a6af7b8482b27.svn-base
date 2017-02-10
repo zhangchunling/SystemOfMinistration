@@ -1,0 +1,119 @@
+<%@ page import="com.zrgk.task.model.Task"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>编辑任务</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+		
+	<!-- 调用CSS样式 -->
+	<link rel="stylesheet" type="text/css" href="<%=basePath%>skin/css/base.css">
+	<script type="text/javascript" src="jsp/jsp_task/js/jsTask.js"></script>
+  </head>
+	 <body leftmargin="8" topmargin="8">
+	
+		<!--  快速转换位置按钮  -->
+		<table width="98%" border="0" cellpadding="0" cellspacing="1" bgcolor="#D1DDAA" align="center">
+		<tr>
+		 <td height="26" background="skin/images/newlinebg3.gif">
+		  <table width="58%" border="0" cellspacing="0" cellpadding="0">
+		  <tr><td>当前位置:任务管理>>编辑任务 </td>
+		 </tr>
+		</table>
+		</td>
+		</tr>
+		</table>
+		
+		<form name="form2" id="update" action="updateTask.Servlet" method="post">		
+			<table width="98%" border="0" cellpadding="2" cellspacing="1" bgcolor="#D1DDAA" align="center" style="margin-top:8px">
+				<tr bgcolor="#E7E7E7">
+					<td height="24" colspan="2" background="skin/images/tbg.gif">&nbsp;编辑任务&nbsp;</td>
+				</tr>
+				<tr>
+					<td align="right" bgcolor="#FAFAF1" height="22">参考位置：</td>
+					<td  align='left' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22">
+						<select id="referenceSite" name="referenceSite">
+							<option value=1>农业银行自助管理系统</option>
+							<option value=1>学生档案管理系统</option>
+							</select>-<select>
+							<option value=1>请选择</option>
+							<option value=1>帐户管理需求分析</option>
+							<option value=2>帐户管理系统分析</option>
+							</select>-<select>
+							<option value=1>请选择</option>
+							<option value=1>帐户管理模块</option>
+							<option value=2>帐户需求模块</option>
+							</select>-<select>
+							<option value=1>请选择</option>
+							<option value=1>添加帐户功能</option>
+						</select>
+							<input type="hidden" id="taskPosition" name="taskPosition" value="${task.getPosition()}"/>
+					</td>
+				</tr>
+				<tr>
+					<td align="right" bgcolor="#FAFAF1" height="22">任务标题：</td>
+					<td  align='left' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22"><input value="完成用户信息增删改查"/></td>
+					<input type="hidden" id="planOption" name="planOption" value="${task.getPlanOption()}" />
+				</tr>
+				<tr>
+					<td align="right" bgcolor="#FAFAF1" height="22">开始时间：</td>
+					<td align='left' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22">
+					<input value="${task.getBeginTime()}" id="beginTime" name="beginTime"/></td>
+				</tr>
+				<tr>
+					<td align="right" bgcolor="#FAFAF1" height="22">结束时间：</td>
+					<td align='left' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22">
+					<input value="${task.getEndTime()}" id="endTime" name="endTime"/></td>
+				</tr>
+				<tr>
+					<td align="right" bgcolor="#FAFAF1" height="22">执行者：</td>
+					<td  align='left' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22">
+						<select id="executor" name="executor">
+							<option value=1>张含馨--初级程序员</option>
+							<option value=1>张&nbsp;&nbsp;伟--中级程序员</option>
+							<option value=1>孙传杰--项目经理</option>
+							<option value=1>其&nbsp;&nbsp;他</option>
+						</select><input type="hidden" id="exectuor" name="exectuor" value="${task.getExectuor()}"/>
+					</td>
+				</tr>
+				<tr>
+					<td align="right" bgcolor="#FAFAF1" height="22">优先级：</td>
+					<td align='left' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22">
+						<select id="position" name="position">
+							<option value=1>高</option>
+							<option value=2>中</option>
+							<option value=3>低</option>
+							<option value=4>暂缓</option>
+						</select><input type="hidden" id="grade" name="grade" value="${task.getGrade}"/>
+					</td>
+				</tr>
+				
+				<tr>
+					<td align="right" bgcolor="#FAFAF1" >详细说明：</td>
+					<td colspan=3 align='left' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';" onMouseOut="javascript:this.bgColor='#FFFFFF';" >
+						<textarea id="detailExplain" name="detailExplain" rows=10 cols=130>${task.getDetailExplain}</textarea>
+					</td>
+				</tr>
+				<tr bgcolor="#FAFAF1">
+					<td height="28" colspan=4 align=center>&nbsp;
+						<input type="submit" value="保存" class="coolbg">	
+						<input type="submit" value="返回" class="coolbg" onClick="task.jsp">
+						<input id="tid" name="tid" type="hidden" value="${task.tid}"/>
+					</td>
+				</tr>
+			</table>		
+		</form>	
+	</body>
+</html>

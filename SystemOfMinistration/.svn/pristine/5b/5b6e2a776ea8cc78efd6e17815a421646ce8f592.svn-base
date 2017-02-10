@@ -1,0 +1,311 @@
+package com.zrgk.purview.dao.Impl;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.zrgk.purview.dao.EmployeeDaoInter;
+import com.zrgk.purview.model.Employee;
+import com.zrgk.utils.JdbcUtil;
+
+/**
+ * 
+ * employee实现接口的类;
+ * 
+ * @author wfh;
+ * 
+ *         2015-06-04;
+ */
+
+public class EmployeeDaoImpl extends JdbcUtil implements EmployeeDaoInter {
+
+	public List<Employee> QueryAll(Employee empl) {
+
+		List<Employee> list = new ArrayList<Employee>();
+
+		List<Object> olist = new ArrayList<Object>();
+
+		StringBuffer sql = new StringBuffer(
+				"select eid, name, position, sex, age, tel, entryTime,cardNum,state,remark,password, username,roles from employee where 1=1 ");
+
+		if (empl != null && empl.getName() != null
+				&& !"".equals(empl.getName().trim())) {
+			sql.append(" and name like ? ");
+			olist.add("%" + empl.getName() + "%");
+		}
+		if (empl != null && empl.getTel() != null
+				&& !"".equals(empl.getTel().trim())) {
+			sql.append(" or tel like ? ");
+			olist.add("%" + empl.getTel() + "%");
+		}
+		if (empl != null && empl.getAddTime() != null
+				&& !"".equals(empl.getAddTime().trim())) {
+
+			if (empl.getAddTime().equals("1")) {
+				sql.append(" order by addTime desc ");
+			}
+			if (empl.getAddTime().equals("2")) {
+				sql.append(" order by changeTime desc ");
+			}
+
+		}
+		int num = 1;
+
+		num = (empl.getCurrentPage() - 1) * empl.getPageSize();
+
+		sql.append(" limit " + num + "," + empl.getPageSize());
+		ResultSet rs = this.queryByPst(olist, sql.toString());
+
+		System.out.println(sql.toString());
+		try {
+			if (rs != null) {
+				while (rs.next()) {
+
+					Employee e = new Employee();
+
+					e.setEid(rs.getInt("eid"));
+					e.setName(rs.getString("name"));
+					e.setPosition(rs.getString("position"));
+					e.setSex(rs.getInt("sex"));
+					e.setAge(rs.getInt("age"));
+					e.setTel(rs.getString("tel"));
+					e.setEntryTime(rs.getString("entryTime"));
+					e.setCardNum(rs.getString("cardNum"));
+					e.setState(rs.getInt("state"));
+					e.setRemark(rs.getString("remark"));
+					e.setPassword(rs.getString("password"));
+					e.setUsername(rs.getString("username"));
+					e.setRoles(rs.getString("roles"));
+
+					list.add(e);
+
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			this.closeAll();
+		}
+
+		return list;
+	}
+
+	public void insertEmployee(Employee empl) {
+
+		String sql = "insert into employee (name,position,sex,age ,tel,entryTime,cardNum,roles,state,remark,password,username,addTime) value(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+		List<Object> params = new ArrayList<Object>();
+
+		params.add(empl.getName());
+		params.add(empl.getPosition());
+		params.add(empl.getSex());
+		params.add(empl.getAge());
+		params.add(empl.getTel());
+		params.add(empl.getEntryTime());
+		params.add(empl.getCardNum());
+		params.add(empl.getRoles());
+		params.add(empl.getState());
+		params.add(empl.getRemark());
+		params.add(empl.getPassword());
+		params.add(empl.getUsername());
+		params.add(empl.getAddTime());
+
+		this.doPst(params, sql);
+		this.closeAll();
+	}
+
+	public void deleteEmployee(Employee empl) {
+
+		String sql = " delete from employee where eid = ?";
+
+		List<Object> params = new ArrayList<Object>();
+
+		params.add(empl.getEid());
+
+		this.doPst(params, sql);
+
+		this.closeAll();
+	}
+
+	public Employee QueryByEid(Employee empl) {
+
+		StringBuffer sql = new StringBuffer(
+				"select * from employee where eid=?");
+
+		List<Object> params = new ArrayList<Object>();
+
+		params.add(empl.getEid());
+		ResultSet rs = this.queryByPst(params, sql.toString());
+		Employee e = new Employee();
+		try {
+
+			if (rs != null) {
+
+				while (rs.next()) {
+
+					e.setEid(rs.getInt("eid"));
+					e.setName(rs.getString("name"));
+					e.setPosition(rs.getString("position"));
+					e.setSex(rs.getInt("sex"));
+					e.setAge(rs.getInt("age"));
+					e.setTel(rs.getString("tel"));
+					e.setEntryTime(rs.getString("entryTime"));
+					e.setState(rs.getInt("state"));
+					e.setCardNum(rs.getString("cardNum"));
+					e.setRemark(rs.getString("remark"));
+					e.setRoles(rs.getString("roles"));
+
+				}
+			}
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+
+			this.closeAll();
+		}
+
+		return e;
+
+	}
+
+	public void UpdateEmployee(Employee empl) {
+
+		StringBuffer sql = new StringBuffer(
+				"update  employee  set name=?, position=?, sex=?, age=?, tel=?, entryTime=?,"
+						+ "cardNum=?,roles=?,state=?,remark=?,password=?,username=?,changeTime=? where eid=?");
+
+		List<Object> params = new ArrayList<Object>();
+
+		params.add(empl.getName());
+		params.add(empl.getPosition());
+		params.add(empl.getSex());
+		params.add(empl.getAge());
+		params.add(empl.getTel());
+		params.add(empl.getEntryTime());
+		params.add(empl.getCardNum());
+		params.add(empl.getRoles());
+		params.add(empl.getState());
+		params.add(empl.getRemark());
+		params.add(empl.getPassword());
+		params.add(empl.getUsername());
+		params.add(empl.getChangeTime());
+		params.add(empl.getEid());
+		this.doPst(params, sql.toString());
+
+		this.closeAll();
+	}
+
+	public void CancelUpdateEmployee(Employee empl) {
+
+		String sql = "update employee set state=2 where eid = ? ";
+
+		List<Object> params = new ArrayList<Object>();
+
+		params.add(empl.getEid());
+
+		this.doPst(params, sql);
+
+		this.closeAll();
+
+	}
+
+	public int totalSize(Employee empl) {
+		int i = 0;
+
+		List<Object> olist = new ArrayList<Object>();
+
+		StringBuffer sql = new StringBuffer(
+				"select  count(*) from employee where 1=1 ");
+
+		if (empl != null && empl.getName() != null
+				&& !"".equals(empl.getName().trim())) {
+			sql.append(" and name like ? ");
+			olist.add("%" + empl.getName() + "%");
+		}
+		if (empl != null && empl.getTel() != null
+				&& !"".equals(empl.getTel().trim())) {
+			sql.append(" or tel like ? ");
+			olist.add("%" + empl.getTel() + "%");
+		}
+		if (empl != null && empl.getAddTime() != null
+				&& !"".equals(empl.getAddTime().trim())) {
+
+			if (empl.getAddTime().equals("1")) {
+				sql.append(" order by addTime desc ");
+			}
+			if (empl.getAddTime().equals("2")) {
+				sql.append(" order by changeTime desc ");
+			}
+
+		}
+
+		ResultSet rs = this.queryByPst(olist, sql.toString());
+
+		System.out.println(sql.toString());
+		try {
+			if (rs != null) {
+				while (rs.next()) {
+
+					i = rs.getInt(1);
+
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			this.closeAll();
+		}
+
+		return i;
+
+	}
+
+	public List<Employee> ExportQueryAll() {
+
+		List<Employee> list = new ArrayList<Employee>();
+
+		String sql = "select * from employee";
+
+		ResultSet rs = this.queryByPst(null, sql);
+
+		try {
+			if (rs != null) {
+				while (rs.next()) {
+
+					Employee e = new Employee();
+
+					e.setEid(rs.getInt("eid"));
+					e.setName(rs.getString("name"));
+					e.setPosition(rs.getString("position"));
+					e.setSex(rs.getInt("sex"));
+					e.setAge(rs.getInt("age"));
+					e.setTel(rs.getString("tel"));
+					e.setEntryTime(rs.getString("entryTime"));
+					e.setCardNum(rs.getString("cardNum"));
+					e.setState(rs.getInt("state"));
+					e.setRemark(rs.getString("remark"));
+					e.setPassword(rs.getString("password"));
+					e.setUsername(rs.getString("username"));
+					e.setRoles(rs.getString("roles"));
+					e.setAddTime(rs.getString("addTime"));
+					e.setChangeTime(rs.getString("changeTime"));
+					list.add(e);
+
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+			this.closeAll();
+		}
+
+		return list;
+
+	}
+
+}

@@ -1,0 +1,178 @@
+package com.zrgk.infobox.dao.impl;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.poi.ss.formula.functions.Value;
+
+import com.zrgk.infobox.dao.MailBoxDaoInter;
+import com.zrgk.infobox.model.MailBox;
+import com.zrgk.utils.JdbcUtil;
+
+/**
+ * dao层的实现类
+ * 
+ * @author 樊丙富 2015-06-04
+ */
+public class MailBoxDaoImpl extends JdbcUtil implements MailBoxDaoInter {
+
+	public void insertMailBox(MailBox mailbox) {// 数据库的增加方法
+		String sql = "insert into mailbox (title,content,adressee,time,slave)values(?,?,?,?,?)";
+		// 封装参数
+		List<Object> info = new ArrayList<Object>();
+
+		info.add(mailbox.getTitle());// 添加题目
+		info.add(mailbox.getContent());// 添加内容
+		info.add(mailbox.getAdressee());// 添加收件人
+		info.add(mailbox.getTime());//时间
+		info.add(mailbox.getSlave());//附件
+		
+		this.doPst(info, sql);// 调用插入数据库的方法
+
+	}
+
+
+	// 查询的实现方法
+	public List<MailBox> queryMailBox(MailBox mailbox) {
+			List<MailBox> list = new ArrayList<MailBox>();
+			List<Object> olist = new ArrayList<Object>();// 组装参数的集合	
+			//线程安全查询所有类
+			//StringBuffer sql = new StringBuffer(
+					//"select Id,title,content,adressee,adresser,send_time,recive_time,delete,isread,slave from mailbox where 1=1 ");
+			StringBuffer sql = new StringBuffer("select * from mailbox where  1=1 ");//线程查询表里所有的内容
+	
+			if (mailbox != null && mailbox.getTitle() != null&& !"".equals(mailbox.getTitle().trim())) {
+				sql.append(" and title like ?"); // 拼接根据用户名来模糊查询的sql
+				olist.add("%" + mailbox.getTitle() + "%");// 向参数集合放值
+			}
+			
+			if (mailbox.getTime()!=null&&!"".equals(mailbox.getTime().trim())&&"2".equals(mailbox.getTime())) {
+				sql.append(" order by time");//拼接根据时间来排序
+			}
+
+
+			 int num=0;//从第几条数据开始
+			 num=(mailbox.getCurrentPage()-1)*mailbox.getPageSize();
+			 sql.append(" limit "+num+","+mailbox.getPageSize());
+		 
+			//   System.out.println(sql.toString());
+		 //调用查询数据库的方法
+			
+			
+		ResultSet rs = this.queryByPst(olist,sql.toString());// 调用查询数据库的方法
+		try {
+			if(rs!=null){
+			while (rs.next()) {// 循环查找表里面的所有数据
+
+				MailBox mail = new MailBox();
+				mail.setId(rs.getInt("id"));
+				mail.setTitle(rs.getString("title"));
+				mail.setContent(rs.getString("content"));
+				mail.setAdressee(rs.getInt("adressee"));
+				mail.setAdresser(rs.getInt("adresser"));
+				mail.setTime(rs.getString("time"));				
+				mail.setDelete(rs.getInt("delete"));
+				mail.setIsread(rs.getInt("isread"));
+				mail.setSlave(rs.getString("slave"));
+				list.add(mail);
+			}
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}finally{//关闭链接
+			this.closeAll();
+		}		
+		return list;
+
+	}
+	//用来分页查询的 根据标题模糊查询
+	public int totalSize(MailBox mailbox) {
+		int i=0;
+		 List<Object> olist=new ArrayList<Object>();//组装参数的集合
+		StringBuffer sql=new StringBuffer("select count(*) from mailbox where 1=1 ");
+		 if(mailbox!=null&&mailbox.getTitle()!=null&&!"".equals(mailbox.getTitle())){
+			 sql.append(" and Title like ?"); //拼接根据标题来模糊查询的sql
+			 olist.add("%"+mailbox.getTitle()+"%");//向参数集合放值 
+		 }
+		 
+		 
+		
+
+		
+		 System.out.println("查询总条数的sql="+sql.toString());
+		 
+		 //调用查询数据库的方法
+		 ResultSet rs = this.queryByPst(olist, sql.toString());// 调用查询数据库的方法
+		 try{
+			 if(rs!=null){
+				 while(rs.next()){
+					 i=rs.getInt(1);
+				 }
+			 }
+		 }catch(Exception e){
+			 e.printStackTrace();
+		 }finally{
+			 this.closeAll();
+		 }
+		 
+		return i;
+	}
+	public void deleteMailBox(int id) {// 根据主键的删除方法
+		String sql = "delete from mailbox where id=?";
+		List<Object> olist = new ArrayList<Object>();// 组装参数的集合
+		olist.add(id);
+		this.doPst(olist, sql);// 调用删除数据库的方法
+
+	}
+
+	public MailBox queryMailBoxByid(int id) {// 根据主键查询的方法
+		MailBox m = new MailBox();// 实例化
+		//String sql = "select id,title,content,adressee,adresser,send_time,recive_time,delete,isread,slave from mailbox ";
+		String sql="select * from mailbox";
+		List<Object> am = new ArrayList<Object>();// 集合
+		am.add(id);
+		ResultSet s = this.queryByPst(am, sql);// 返回结果集
+		try {
+			if (s != null) {// 判断不为空
+				while (s.next()) {
+					m.setId(s.getInt("id"));
+					m.setTitle(s.getString("title"));
+					m.setContent(s.getString("content"));
+					m.setAdressee(s.getInt("adressee"));
+					m.setAdresser(s.getInt("adresser"));
+					m.setTime(s.getString("send_time"));				
+					m.setDelete(s.getInt("delete"));
+					m.setIsread(s.getInt("isread"));
+					m.setSlave(s.getString("slave"));
+				}
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {// 关闭链接
+			this.closeAll();
+		}
+		return m;
+	}
+
+	public void updateMailBox(MailBox mailbox) {// 修改数据的方法
+		String sql = "update mailbox set title=？,content=？,adressee=？,adresser=？,send_time=?,recive_time=?,delete=？,isread=?,salve=? where id=?";// 修改语句根据主键
+		List<Object> am = new ArrayList<Object>();// 组装参数
+		am.add(mailbox.getTitle());// 修改的数据数序要保持一致
+		am.add(mailbox.getContent());
+		am.add(mailbox.getAdressee());
+		am.add(mailbox.getAdresser());
+		am.add(mailbox.getTime());
+		am.add(mailbox.getDelete());
+		am.add(mailbox.getIsread());
+		am.add(mailbox.getSlave());
+		this.doPst(am, sql);// 调用修改的方法
+	}
+
+
+	}
+
+

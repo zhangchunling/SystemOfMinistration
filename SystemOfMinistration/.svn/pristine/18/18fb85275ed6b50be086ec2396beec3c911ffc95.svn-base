@@ -1,0 +1,20 @@
+package com.zrgk.project.service;
+
+import java.util.List;
+
+import com.zrgk.project.model.Basicer;
+/**
+ * 
+ * @function: service层，增删改查接口
+ * @author: 张春玲
+ * @time: 2015-6-4
+ *
+ */
+public interface BasicerServiceInter {
+	
+	boolean insertBasicer(Basicer baicer);		//增	
+	void deleteBasicer(int pid);				//删
+	void updateBasicer(Basicer baicer);			//改
+	List<Basicer> queryAllBasicer();			//查询所有
+	Basicer queryBasicerById(int pid);			//按id查
+}

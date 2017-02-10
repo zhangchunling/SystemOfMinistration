@@ -1,0 +1,13 @@
+package com.zrgk.clientinfo.dao;
+
+import java.util.List;
+
+import com.zrgk.clientinfo.model.Users;
+
+
+public interface UsersDaoInter {
+	void insertUser(Users user);//新增客户的方法
+	List<Users> queryUsers(Users user);//查询用户信息
+	// void deleteUser(int uid);//删除 用户的方法
+
+}
